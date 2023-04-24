@@ -79,4 +79,9 @@ def fonWelcome():
     return render_template('fonWelcome.html')
 
 if(__name__ == '__main__'):
+   
+    with app.app_context():
+       print('Creating database tables...')
+       db.create_all()
+       print('Done.')
     app.run(debug=True)

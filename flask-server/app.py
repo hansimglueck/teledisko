@@ -1,11 +1,28 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from random import randint
 from time import sleep
-
-# Hallo Hans
 import os
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
-qrLoadedFlag = False
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'teledisko.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+
+class User(db.Model):
+    __tablename__ = 'teledisko'
+    id = db.Column(db.Integer, primary_key=True)
+    videoFile = db.Column(db.String(120), unique=False, nullable=False)   
+    session = db.Column(db.String(120), unique=False, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.utcnow)
+    qrLoadedFlag = db.Column(db.Boolean, default=False)
+
+
 
 app = Flask(__name__)
 
@@ -47,7 +64,7 @@ def qrCode():
 
 @app.route('/qrLoaded')
 def qrLoaded():
-    while (not qrLoadedFlag):
+    while (not True):
         # read qrLoadedFlag from database (will be set when fon open fonWelcome)
         print ("waiting for qr code scan")
         # delay for 1 second
@@ -60,3 +77,6 @@ def qrLoaded():
 def fonWelcome():
     # set qrLoadedFlag in database to true
     return render_template('fonWelcome.html')
+
+if(__name__ == '__main__'):
+    app.run(debug=True)

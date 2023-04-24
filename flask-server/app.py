@@ -49,10 +49,12 @@ def dsgvoConfirm():
 
 @app.route('/qrCode')
 def qrCode():
+    print("QR")
     return render_template('qrCode.html')
 
 @app.route('/qrLoaded')
 def qrLoaded():
+    print("QR - waiting")
     # TODO: find a better way to do this
     # check if there was a user created in the last second
     while (User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is None):

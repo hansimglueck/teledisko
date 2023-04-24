@@ -16,8 +16,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 class User(db.Model):
     __tablename__ = 'teledisko'
     id = db.Column(db.Integer, primary_key=True)
-    videoFile = db.Column(db.String(120), unique=False, nullable=False)   
-    session = db.Column(db.String(120), unique=False, nullable=False)
+    videoFile = db.Column(db.String(120), unique=False)   
+    sessionId = db.Column(db.String(120), unique=False, nullable=False)
     createdAt = db.Column(db.DateTime, default=datetime.utcnow)
     qrLoadedFlag = db.Column(db.Boolean, default=False)
 
@@ -25,10 +25,7 @@ db.init_app(app)
 
 @app.route('/')
 def welcome():
-    id = randint(0, 1000000)
-    resp = make_response(render_template('welcome.html'))
-    resp.set_cookie('id', str(id))
-    return resp
+    return render_template('welcome.html')
 
 @app.route('/welcomeConfirm')
 def welcomeConfirm():
@@ -36,7 +33,7 @@ def welcomeConfirm():
 
 @app.route('/really')
 def really():
-    return render_template('really.html', id=request.cookies.get('id'))
+    return render_template('really.html')
 
 @app.route('/reallyConfirm')
 def reallyConfirm():
@@ -44,11 +41,11 @@ def reallyConfirm():
 
 @app.route('/dsgvo')
 def dsgvo():
-    return render_template('DSGVO.html', id=request.cookies.get('id'))
+    return render_template('DSGVO.html')
 
 @app.route('/dsgvoConfirm')
 def dsgvoConfirm():
-    return render_template('qrCode.html')
+    return redirect(url_for('qrCode'))
 
 @app.route('/qrCode')
 def qrCode():
@@ -56,7 +53,9 @@ def qrCode():
 
 @app.route('/qrLoaded')
 def qrLoaded():
-    while (not True):
+    # TODO: find a better way to do this
+    # check if there was a user created in the last second
+    while (User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is None):
         print ("waiting for qr code scan")
         sleep(1)
         pass
@@ -64,9 +63,16 @@ def qrLoaded():
 
 @app.route('/fonWelcome')
 def fonWelcome():
-    return render_template('fonWelcome.html')
+    id = randint(0, 1000000)
+    resp = make_response(render_template('fonWelcome.html'))
+    resp.set_cookie('id', str(id))
+    user = User(sessionId = str(id))
+    db.session.add(user)
+    db.session.commit()
+    return resp
 
 if(__name__ == '__main__'):
+    # uncomment once to reflect changes to the model (and delte database-file)
     # with app.app_context():
     #     print('Creating database tables...')
     #     db.create_all()

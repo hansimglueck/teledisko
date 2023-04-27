@@ -8,14 +8,14 @@
     <h1>Waehle deine Show aus !</h1>
     <p>“Dann geht ab</p>
 
-    <a href="rotShow">
+    <a href="roteShow">
         <button>Rot</button>
     </a>
 
-    <a href="blauShow">
+    <a href="blaueShow">
         <button>Blau</button>
     </a>
-    <p>{{id}}</p><!-- Das ist unser gesetzter Cockie fuer spaeteren Download link-->
+    <p>Your session id is: <strong>{{ request.cookies.get('id') }}</strong></p>
     <p>Touchscreen</p>
 </div>
 {% endblock %}

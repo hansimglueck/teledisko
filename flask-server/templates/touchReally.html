@@ -16,7 +16,7 @@
     <a href="touchReallyConfirm">
         <button>Nein</button>
     </a>
-    <p>{{id}}</p><!-- Das ist unser gesetzter Cockie fuer spaeteren Download link-->
+    <p>Your session id is: <strong>{{ request.cookies.get('id') }}</strong></p>
     <p>Touchscreen</p>
 </div>
 {% endblock %}

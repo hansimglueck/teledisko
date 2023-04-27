@@ -27,33 +27,33 @@ db.init_app(app)
 def welcome():
     return render_template('touchWelcome.html')
 
-@app.route('/welcomeConfirm')
-def welcomeConfirm():
-    return redirect(url_for('really'))
+@app.route('/touchWelcomeConfirm')
+def touchWelcomeConfirm():
+    return redirect(url_for('touchReally'))
 
-@app.route('/really')
-def really():
-    return render_template('really.html')
+@app.route('/touchReally')
+def touchReally():
+    return render_template('touchReally.html')
 
-@app.route('/reallyConfirm')
-def reallyConfirm():
-    return redirect(url_for('dsgvo'))
+@app.route('/touchReallyConfirm')
+def touchReallyConfirm():
+    return redirect(url_for('touchDsgvo'))
 
-@app.route('/dsgvo')
-def dsgvo():
+@app.route('/touchDsgvo')
+def touchDsgvo():
     return render_template('touchDSGVO.html')
 
-@app.route('/dsgvoConfirm')
-def dsgvoConfirm():
-    return redirect(url_for('qrCode'))
+@app.route('/touchDsgvoConfirm')
+def touchDsgvoConfirm():
+    return redirect(url_for('touchQrCode'))
 
-@app.route('/qrCode')
-def qrCode():
+@app.route('/touchQrCode')
+def touchQrCode():
     print("QR")
-    return render_template('qrCode.html')
+    return render_template('touchQrCode.html')
 
-@app.route('/qrLoaded')
-def qrLoaded():
+@app.route('/touchQrLoaded')
+def touchQrLoaded():
     print("QR - waiting")
     # TODO: find a better way to do this
     # check if there was a user created in the last second
@@ -61,7 +61,7 @@ def qrLoaded():
         print ("waiting for qr code scan")
         sleep(1)
         pass
-    return render_template('qrLoaded.html')
+    return render_template('touchQrLoaded.html')
 
 @app.route('/fonWelcome')
 def fonWelcome():

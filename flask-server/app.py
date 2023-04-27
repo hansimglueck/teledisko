@@ -101,7 +101,7 @@ def RecodRoteShow():
     video_file = 'output.mp4'
     audio_file = 'redShow.mp3'
     merged_file = 'merged.mp4'
-    cmd = f'ffmpeg -i {video_file} -i {audio_file} -c:v copy -c:a aac -async 1 {merged_file}'
+    cmd = f'ffmpeg -y -i {video_file} -i {audio_file} -c:v copy -c:a aac -async 1 {merged_file}'
     subprocess.call(cmd, shell=True)
 
     # remove temporary files

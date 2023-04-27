@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Videoaufnahme</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <h1>Hallo Fon</h1>
-</body>
-</html>
+
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Fon Welcome</h1>
+    <p>“Bitte geöffnet lassen, nachher gibts hier das video als Download”</p>
+    <p>“Nachdem die Videoaufzeichnung beendet worden ist”</p>
+
+    <a href="">
+        <button>Download Dein Video</button>
+    </a>
+   
+    <p>{{id}}</p><!-- Das ist unser gesetzter Cockie fuer spaeteren Download link-->
+    <p>Smarth-Phone</p>
+</div>
+{% endblock %}

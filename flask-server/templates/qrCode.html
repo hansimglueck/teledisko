@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Videoaufnahme</title>
-    <meta charset="utf-8">
-    <script>
-        // load page /qrLoaded on page load
-        window.onload = function() {
-            window.location.href = "qrLoaded";
-        }
-    </script>
-</head>
-<body>
-    <h1>QR</h1>
-</body>
-</html>
+
+
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+    // load page /qrLoaded on page load
+    window.onload = function() {
+        window.location.href = "qrLoaded";
+    }
+</script>
+ {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>QR-CODE</h1>
+    <p>Scanne diesen Qr Code auf deinen Handy and connect to Wifi</p>
+     <img src="static/images/qrCode.png" alt="QR-Code" width="200" height="200">
+   
+    <p>{{id}}</p><!-- Das ist unser gesetzter Cockie fuer spaeteren Download link-->
+    <p>Touchscreen</p>
+</div>
+{% endblock %}

@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Videoaufnahme</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <h1>QR loaded</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block head %}
+ {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Waehle deine Show aus !</h1>
+    <p>“Dann geht ab</p>
+
+    <a href="rotShow">
+        <button>Rot</button>
+    </a>
+
+    <a href="blauShow">
+        <button>Blau</button>
+    </a>
+    <p>{{id}}</p><!-- Das ist unser gesetzter Cockie fuer spaeteren Download link-->
+    <p>Touchscreen</p>
+</div>
+{% endblock %}

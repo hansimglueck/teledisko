@@ -25,7 +25,7 @@ db.init_app(app)
 
 @app.route('/')
 def welcome():
-    return render_template('welcome.html')
+    return render_template('touchWelcome.html')
 
 @app.route('/welcomeConfirm')
 def welcomeConfirm():
@@ -41,7 +41,7 @@ def reallyConfirm():
 
 @app.route('/dsgvo')
 def dsgvo():
-    return render_template('DSGVO.html')
+    return render_template('touchDSGVO.html')
 
 @app.route('/dsgvoConfirm')
 def dsgvoConfirm():

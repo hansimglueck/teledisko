@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head %}
+ {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>DSGVO</h1>
+    <p>Wir verarbeiten Ihre personenbezogenen Daten im Zusammenhang mit der Nutzung unserer Videocapture-Dienste ausschließlich zu dem Zweck, Ihnen eine sichere und qualitativ hochwertige 
+        Videocapture-Funktionalität bereitzustellen. Die Rechtsgrundlage hierfür ist Art. 6 Abs. 1 lit. b DSGVO.</p>
+
+    <a href="dsgvoConfirm">
+        <button>Einverstanden</button>
+    </a>
+    <p>{{id}}</p><!-- Das ist unser gesetzter Cockie fuer spaeteren Download link-->
+    <p>Touchscreen</p>
+</div>
+{% endblock %}

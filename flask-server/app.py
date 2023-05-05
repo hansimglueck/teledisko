@@ -4,7 +4,7 @@ from time import sleep
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import cv2
+
 import subprocess
 import time 
 import gi

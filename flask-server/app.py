@@ -7,12 +7,20 @@ from datetime import datetime
 import cv2
 import subprocess
 import time 
+import gi
+gi.require_version('Gst', '1.0')
+from gi.repository import Gst
+
+Gst.init(None)
+pipeline = Gst.parse_launch('v4l2src device=/dev/video0 ! video/x-raw,width=640,height=480,framerate=30/1 ! videorate ! queue ! videoconvert ! vp8enc threads=2 deadline=1 target-bitrate=512000 ! webmmux name=mux ! filesink location=static/videos/test.webm sync=true autoaudiosrc ! queue ! audioconvert ! vorbisenc bitrate=128000 ! mux.')
 
 db = SQLAlchemy()
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
+
+app = Flask(__name__, static_url_path='', static_folder='static')
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'teledisko.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -24,7 +32,7 @@ class User(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.utcnow)
     qrLoadedFlag = db.Column(db.Boolean, default=False)
     videoReayToDownloadFlag = db.Column(db.Boolean, default=False)
-
+    
 
 db.init_app(app)
 
@@ -62,8 +70,13 @@ def touchQrLoaded():
     session_id = request.cookies.get('id')
     print("QR - waiting for session id:", session_id)
     print("QR - waiting")
+
     # TODO: find a better way to do this
-    # check if there was a user created in the last second
+    # creates a while loop that will keep running until a 
+    # User object is created with a "createdAt" attribute
+    # that is greater than the current UTC datetime with
+    # its seconds and microseconds set to zero.
+    # I wait for fonWelcome to create a user object with a session id
     while (User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is None):
         print ("waiting for qr code scan")
         sleep(1)
@@ -77,69 +90,71 @@ def roteShow():
 
 @app.route('/RecordRoteShow')
 def RecodRoteShow():
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FPS, 30)
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter('output.mp4', fourcc, 30.0, (640, 480))
-    start_time = time.time()
-    while(cap.isOpened()):
-        ret, frame = cap.read()
-        if ret==True:
-            out.write(frame)
-            cv2.imshow('frame',frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-            if time.time() - start_time > 20:
-                break
-        else:
-            break
-    cap.release()
-    out.release()
-    cv2.destroyAllWindows()
-
-    # merge audio and video
-    video_file = 'output.mp4'
-    audio_file = 'redShow.mp3'
-    merged_file = 'merged.mp4'
-    cmd = f'ffmpeg -y -i {video_file} -i {audio_file} -c:v copy -c:a aac -async 1 {merged_file}'
-    subprocess.call(cmd, shell=True)
-
-    # remove temporary files
-    os.remove(video_file)
-    #os.remove(audio_file)
+    pipeline.set_state(Gst.State.PLAYING)
+    print('Started recording')
+    time.sleep(20)  # wait for 20 seconds
+    pipeline.set_state(Gst.State.NULL)  # stop recording
+    print('Stopped recording')
 
     # Save the video file name to the database
     # Save videoReayToDownloadFlag to the Database
     session_id = request.cookies.get('id')
     user = User.query.filter_by(sessionId=session_id).first()
-    user.videoFile = 'merged.mp4'
+    user.videoFile = 'test.webm'
     user.videoReayToDownloadFlag = True
     db.session.commit()
-     
+
     return render_template('roteShowEnde.html')
 
 
 
+"""
+ 
+     _  _   _____ ___  _   _ 
+   _| || |_|  ___/ _ \| \ | |
+  |_  ..  _| |_ | | | |  \| |
+  |_      _|  _|| |_| | |\  |
+    |_||_| |_|   \___/|_| \_|
+                             
+ 
+"""
 @app.route('/fonWelcome')
 def fonWelcome():
-    id = randint(0, 1000000)
-    resp = make_response(render_template('fonWelcome.html'))
-    resp.set_cookie('id', str(id))
-    user = User(sessionId = str(id))
-    db.session.add(user)
-    db.session.commit()
-    return resp
+     
+        id = str(randint(0, 1000000))
+        user = User(sessionId=id)
+        db.session.add(user)
+        db.session.commit()
+         
+        user = User.query.filter_by(sessionId=id).first()
+        # Set the session ID as a cookie
+        resp = make_response(render_template('fonWelcome.html'))
+        resp.set_cookie('id', id)
+
+        return resp
+
 
 
 
 @app.route('/fonDownloadVideo')
 def fonDownloadVideo():
-  
-   #Todo ABfragen ob video schon bereit ist
-   #Todo Wenn ja springe zu fonDownloadVideo.html und ubergebe den downlaodlink als variable
-    print("Warte das Video gerendert wird ")
-    return redirect(url_for('fonDownloadVideo'))
-    #return render_template('fonDownloadVideo.html')
+    session_id = request.cookies.get('id')
+    user = User.query.filter_by(sessionId=session_id).first()
+
+    # Wait until the user's video is ready for download
+    while not user.videoReayToDownloadFlag:
+        print("Waiting for download link...")
+        sleep(1)
+        user = User.query.filter_by(sessionId=session_id).first()
+
+    # Set the videoReadyToDownloadFlag to False so that the user cannot download it again
+    user.videoReayToDownloadFlag = False
+    db.session.commit()
+
+    # Generate the download link and pass it to the template
+    video_link = url_for('static', filename='videos/test.webm')
+    return render_template('fonDownloadVideo.html', video_link=video_link)
+
 
 
 if(__name__ == '__main__'):

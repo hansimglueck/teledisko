@@ -2,14 +2,14 @@
 {% extends "base.html" %}
 
 {% block head %}
-<!--
+
 <script>
     // load page /qrLoaded on page load
     window.onload = function () {
         window.location.href = "fonDownloadVideo";
     }
 </script>
--->
+
 {% endblock %}
 
 {% block body %}
@@ -18,9 +18,7 @@
     <p>“Bitte geöffnet lassen, nachher gibts hier das video als Download”</p>
     <p>“Nachdem die Videoaufzeichnung beendet worden ist”</p>
 
-
-   
-    <p>Your session id is: <strong>{{ request.cookies.get('id') }}</strong></p>
+    <p>Your  new session id is: <strong>{{ request.cookies.get('id') }}</strong></p>
     <p>Smarth-Phone</p>
 </div>
 {% endblock %}

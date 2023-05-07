@@ -4,15 +4,9 @@ from time import sleep
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
 import subprocess
 import time 
-import gi
-gi.require_version('Gst', '1.0')
-from gi.repository import Gst
 
-Gst.init(None)
-pipeline = Gst.parse_launch('v4l2src device=/dev/video0 ! video/x-raw,width=640,height=480,framerate=30/1 ! videorate ! queue ! videoconvert ! vp8enc threads=2 deadline=1 target-bitrate=512000 ! webmmux name=mux ! filesink location=static/videos/test.webm sync=true autoaudiosrc ! queue ! audioconvert ! vorbisenc bitrate=128000 ! mux.')
 
 db = SQLAlchemy()
 
@@ -90,11 +84,7 @@ def roteShow():
 
 @app.route('/RecordRoteShow')
 def RecodRoteShow():
-    pipeline.set_state(Gst.State.PLAYING)
-    print('Started recording')
-    time.sleep(20)  # wait for 20 seconds
-    pipeline.set_state(Gst.State.NULL)  # stop recording
-    print('Stopped recording')
+
 
     # Save the video file name to the database
     # Save videoReayToDownloadFlag to the Database

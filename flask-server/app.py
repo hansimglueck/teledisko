@@ -95,7 +95,7 @@ def RecordRoteShow():
     #Video records for 10 Seconds
     myCamera.update()
     myCamera.startVideoRecording()
-    time.sleep(10) 
+    time.sleep(120) 
     myCamera.stopVideoRecording()
 
 
@@ -111,10 +111,18 @@ def RecordRoteShow():
 
     last_entry = User.query.order_by(User.createdAt.desc()).first()
 
-    print(last_entry.videoFile)
-    video_url = last_entry.videoFile
-    print(video_url)
-    return render_template('roteShowEnde.html',video_url=video_url)
+    if last_entry is not None:
+
+        print(last_entry.videoFile)
+        video_url = last_entry.videoFile
+        print(video_url)
+        return render_template('roteShowEnde.html',video_url=video_url)
+    else:
+
+        return"Die VideoUrl konnte nicht ausgelesen werden"
+
+
+
 
 
 
@@ -135,16 +143,27 @@ def RecordRoteShow():
 def fonWelcome():
      
         id = str(randint(0, 1000000))
+        print("Aktuelle SesiionId:")
+        print(id)
         user = User(sessionId=id)
         db.session.add(user)
         db.session.commit()
          
         user = User.query.filter_by(sessionId=id).first()
-        # Set the session ID as a cookie
-        resp = make_response(render_template('fonWelcome.html'))
-        resp.set_cookie('id', id)
 
-        return resp
+        if user is not None:
+             # do something with the user object
+             print("Aktuelle SesiionId:")
+             print(user.sessionId)
+            # Set the session ID as a cookie
+             resp = make_response(render_template('fonWelcome.html',aktuelleSessionId=user.sessionId))
+             resp.set_cookie('id', id)
+             return resp
+        else:
+             # handle the case where no user object was found
+             print("Aktuelle User Id ist nicht vergeben")
+             return "ERROR: Die Session konnte nicht abgerufen werden!!!!!"
+
 
 
 

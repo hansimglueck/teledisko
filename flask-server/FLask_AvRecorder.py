@@ -15,7 +15,7 @@ class AVideoRecorder:
         self.picam2 = Picamera2()
         
 
-        controls = {"Contrast": 0.5, "ExposureTime": 10000, "AnalogueGain": 22.0}
+        controls = {"Contrast": 1.5, "ExposureTime": 10000, "AnalogueGain": 22.0}
         
         video_config = self.picam2.create_video_configuration(main={"size": (640, 480)},controls=controls)
         self.picam2.configure(video_config)

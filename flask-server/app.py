@@ -1,19 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from random import randint
 from time import sleep
+import time
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import subprocess
-import time 
+from camera import Camera
 
+
+app = Flask(__name__, static_url_path='/static')
+app.config['STATIC_FOLDER'] = 'static'
+
+########################### SQL-DATABASE###################################
 db = SQLAlchemy()
-
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-
-
-app = Flask(__name__, static_url_path='', static_folder='static')
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'teledisko.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -25,9 +25,18 @@ class User(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.utcnow)
     qrLoadedFlag = db.Column(db.Boolean, default=False)
     videoReayToDownloadFlag = db.Column(db.Boolean, default=False)
-    
 
-db.init_app(app)
+db.init_app(app)   
+
+
+#########################################################################
+
+########################### CAMERA###################################
+
+myCamera = Camera()
+
+
+
 
 @app.route('/')
 def welcome():
@@ -74,7 +83,7 @@ def touchQrLoaded():
         print ("waiting for qr code scan")
         sleep(1)
         pass
-    return render_template('touchQrLoaded.html')
+    return render_template('touchRotOderBlau.html')
 
 
 @app.route('/roteShow')
@@ -82,18 +91,34 @@ def roteShow():
      return render_template('roteShowStart.html')
 
 @app.route('/RecordRoteShow')
-def RecodRoteShow():
+def RecordRoteShow():
+
+    #Video records for 10 Seconds
+    myCamera.update()
+    myCamera.startVideoRecording()
+    time.sleep(10) 
+    myCamera.stopVideoRecording()
 
 
     # Save the video file name to the database
     # Save videoReayToDownloadFlag to the Database
     session_id = request.cookies.get('id')
     user = User.query.filter_by(sessionId=session_id).first()
-    user.videoFile = 'test.webm'
+    user.videoFile = myCamera.videoFileName
     user.videoReayToDownloadFlag = True
     db.session.commit()
 
-    return render_template('roteShowEnde.html')
+    time.sleep(2)
+
+    last_entry = User.query.order_by(User.createdAt.desc()).first()
+
+    print(last_entry.videoFile)
+    video_url = last_entry.videoFile
+    print(video_url)
+    return render_template('roteShowEnde.html',video_url=video_url)
+
+
+
 
 
 

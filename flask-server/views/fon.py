@@ -7,8 +7,8 @@ fon_blueprint = Blueprint("fon", __name__)
 
 
 
-@fon_blueprint.route('/fonWelcome')
-def fonWelcome():
+@fon_blueprint.route('/Welcome')
+def Welcome():
      
         id = str(randint(0, 1000000))
         print("Aktuelle SesiionId:")
@@ -21,7 +21,7 @@ def fonWelcome():
 
         if user is not None:
              # do something with the user object
-             print("Aktuelle SesiionId:")
+             print("Random Session_ID:")
              print(user.sessionId)
             # Set the session ID as a cookie
              #resp = make_response(redirect(url_for('fonDownloadVideo')))
@@ -35,8 +35,8 @@ def fonWelcome():
 
 
 
-@fon_blueprint.route('/fonDownloadVideo')
-def fonDownloadVideo():
+@fon_blueprint.route('/DownloadVideo')
+def nDownloadVideo():
     session_id = request.cookies.get('id')
     user = User.query.filter_by(sessionId=session_id).first()
 

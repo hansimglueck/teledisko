@@ -13,39 +13,48 @@ myCamera = Camera()
 
 touch_blueprint = Blueprint("touch", __name__)
 
+def wait_for(condition_function, timeout=10, poll_interval=1):
+    start_time = time.time()
+
+    while not condition_function():
+        if time.time() - start_time > timeout:
+            raise TimeoutError("Timeout while waiting for condition.")
+        sleep(poll_interval)
+
+
 
 
 @touch_blueprint.route('/')
 def welcome():
     return render_template('touchWelcome.html')
 
-@touch_blueprint.route('/touchWelcomeConfirm')
-def touchWelcomeConfirm():
-    return redirect(url_for('touchReally'))
+@touch_blueprint.route('/WelcomeConfirm')
+def WelcomeConfirm():
+    return redirect(url_for('touch.Really'))
 
-@touch_blueprint.route('/touchReally')
-def touchReally():
+@touch_blueprint.route('/Really')
+def Really():
     return render_template('touchReally.html')
 
-@touch_blueprint.route('/touchReallyConfirm')
-def touchReallyConfirm():
-    return redirect(url_for('touchDsgvo'))
+@touch_blueprint.route('/ReallyConfirm')
+def ReallyConfirm():
+    return redirect(url_for('touch.Dsgvo'))
 
-@touch_blueprint.route('/touchDsgvo')
-def touchDsgvo():
+@touch_blueprint.route('/Dsgvo')
+def Dsgvo():
     return render_template('touchDSGVO.html')
 
-@touch_blueprint.route('/touchDsgvoConfirm')
-def touchDsgvoConfirm():
-    return redirect(url_for('touchQrCode'))
+@touch_blueprint.route('/DsgvoConfirm')
+def DsgvoConfirm():
+    return redirect(url_for('touch.QrCode'))
 
-@touch_blueprint.route('/touchQrCode')
-def touchQrCode():
+@touch_blueprint.route('/QrCode')
+def QrCode():
     print("QR")
     return render_template('touchQrCode.html')
 
-@touch_blueprint.route('/touchQrLoaded')
-def touchQrLoaded():
+@touch_blueprint.route('/QrLoaded')
+def QrLoaded():
     session_id = request.cookies.get('id')
     print("QR - waiting for session id:", session_id)
     print("QR - waiting")
@@ -56,11 +65,20 @@ def touchQrLoaded():
     # that is greater than the current UTC datetime with
     # its seconds and microseconds set to zero.
     # I wait for fonWelcome to create a user object with a session id
-    while (User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is None):
-        print ("waiting for qr code scan")
-        sleep(1)
-        pass
-    return render_template('touchRotOderBlau.html')
+    # while (User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is None):
+    #     print ("waiting for qr code scan")
+    #     sleep(1)
+    #     pass
+    # return render_template('touchRotOderBlau.html')
+    def user_created():
+        return User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is not None
+
+    try:
+        wait_for(user_created, timeout=10, poll_interval=1)
+        return render_template('touchRotOderBlau.html')
+    except TimeoutError:
+        return "Timeout while waiting for QR code scan.", 500
+
 
 
 @touch_blueprint.route('/roteShow')
@@ -73,7 +91,7 @@ def RecordRoteShow():
     #Video records for 10 Seconds
     myCamera.update()
     myCamera.startVideoRecording()
-    time.sleep(120) 
+    time.sleep(5) 
     myCamera.stopVideoRecording()
 
 

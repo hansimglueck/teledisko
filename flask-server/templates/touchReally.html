@@ -9,11 +9,12 @@
     <h1>LOs gehts</h1>
     <p>“Hast Du Dein Fon dabei und möchtest ein Video aufzeichnen?”</p>
 
-    <a href="touchReallyConfirm">
+    <a href="{{ url_for('touch.ReallyConfirm') }}">
+  
         <button>Ja</button>
     </a>
 
-    <a href="touchReallyConfirm">
+    <a href="{{ url_for('touch.ReallyConfirm') }}">
         <button>Nein</button>
     </a>
     <p>Previuos session id is: <strong>{{ request.cookies.get('id') }}</strong></p>

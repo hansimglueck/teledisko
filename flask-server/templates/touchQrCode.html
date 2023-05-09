@@ -4,7 +4,7 @@
 <script>
     // load page /qrLoaded on page load
     window.onload = function () {
-        window.location.href = "touchQrLoaded";
+        window.location.href = "{{ url_for('touch.QrLoaded') }}";
     }
 </script>
 {% endblock %}
@@ -15,7 +15,7 @@
     <p>Scanne diesen Qr Code auf deinen Handy and connect to Wifi</p>
     <img src="static/images/qrCode.png" alt="QR-Code" width="200" height="200">
 
-    <p><a href="fonWelcome" target="_blank">
+    <p><a href="{{ url_for('fon.Welcome') }}" target="_blank">
             <button>Open in new tab - Simulates Smartphone</button>
         </a>
     </p>

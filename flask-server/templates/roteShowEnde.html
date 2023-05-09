@@ -1,21 +1,19 @@
 {% extends "base.html" %}
 {% block head %}
 
-
 {% endblock %}
+
 {% block body %}
 
 <div class="container">
+
     <h1>RoteShow Ende!</h1>
     <p>Die VideoCapture Aufnahme ist zuende</p>
     <p>Auf deinen Handy muesste Jetzt dein Video Download Link zu sehen sein</p>
     <p>Oder</p>
     <p>Schaue es hier direkt auf dem Touchscrren an</p>
-    <video src="{{video_url}}" controls></video>
-
-
+    <p><video src="{{video_url}}" controls></video></p>
     
-    </a>
     <p>Touchscreen</p>
 </div>
 {% endblock %}

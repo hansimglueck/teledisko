@@ -156,6 +156,7 @@ def fonWelcome():
              print("Aktuelle SesiionId:")
              print(user.sessionId)
             # Set the session ID as a cookie
+             #resp = make_response(redirect(url_for('fonDownloadVideo')))
              resp = make_response(render_template('fonWelcome.html',aktuelleSessionId=user.sessionId))
              resp.set_cookie('id', id)
              return resp
@@ -163,8 +164,6 @@ def fonWelcome():
              # handle the case where no user object was found
              print("Aktuelle User Id ist nicht vergeben")
              return "ERROR: Die Session konnte nicht abgerufen werden!!!!!"
-
-
 
 
 

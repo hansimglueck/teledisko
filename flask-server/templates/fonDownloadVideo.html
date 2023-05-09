@@ -9,8 +9,12 @@
 <div class="container">
 
     <h1>Download Video</h1>
+    
     <p>Click the button below to download the video:</p>
-    <a href="{{video_link}}" download=""><button>Download Video</button></a>
+
+    <a href="{{video_link}}" download="">
+        <button>Download Video</button>
+    </a>
 
  
     <p>Aktuelle session id is: <strong>{{ request.cookies.get('id') }}</strong></p>

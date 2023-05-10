@@ -8,6 +8,8 @@ app = Flask(__name__, static_url_path='/static')
 app.config['STATIC_FOLDER'] = 'static'
 app.config.from_object(Config)
 
+host = '0.0.0.0'  # Lauschen auf Anfragen von beliebigen IPs
+
 app.register_blueprint(touch_blueprint)
 app.register_blueprint(fon_blueprint)
 
@@ -19,5 +21,5 @@ if (__name__ == '__main__'):
     #     print('Creating database tables...')
     #     db.create_all()
     #     print('Done.')
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
 

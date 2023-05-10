@@ -6,7 +6,7 @@ from datetime import datetime
 from time import sleep
 from models import db, User
 from time import sleep
-
+from random import randint
 
 myCamera = Camera()
 
@@ -40,46 +40,44 @@ def Really():
 def ReallyConfirm():
     return redirect(url_for('touch.Dsgvo'))
 
+
 @touch_blueprint.route('/Dsgvo')
 def Dsgvo():
     return render_template('touchDSGVO.html')
 
 @touch_blueprint.route('/DsgvoConfirm')
 def DsgvoConfirm():
-    return redirect(url_for('touch.QrCode'))
-
-@touch_blueprint.route('/QrCode')
-def QrCode():
-    print("QR")
-    return render_template('touchQrCode.html')
-
-@touch_blueprint.route('/QrLoaded')
-def QrLoaded():
-    session_id = request.cookies.get('id')
-    print("QR - waiting for session id:", session_id)
-    print("QR - waiting")
-
-    # TODO: find a better way to do this
-    # creates a while loop that will keep running until a 
-    # User object is created with a "createdAt" attribute
-    # that is greater than the current UTC datetime with
-    # its seconds and microseconds set to zero.
-    # I wait for fonWelcome to create a user object with a session id
-    # while (User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is None):
-    #     print ("waiting for qr code scan")
-    #     sleep(1)
-    #     pass
-    # return render_template('touchRotOderBlau.html')
-    def user_created():
-        return User.query.filter(User.createdAt > datetime.utcnow().replace(second=0, microsecond=0)).first() is not None
-
-    try:
-        wait_for(user_created, timeout=10, poll_interval=1)
-        return render_template('touchRotOderBlau.html')
-    except TimeoutError:
-        return "Timeout while waiting for QR code scan.", 500
+    return redirect(url_for('touch.GetCode'))
 
 
+@touch_blueprint.route('/GetCode')
+def GetCode():
+     
+        id = str(randint(0, 1000000))
+        print("Aktuelle Code:")
+        print(id)
+        user = User(sessionId=id)
+        db.session.add(user)
+        db.session.commit()
+         
+        user = User.query.filter_by(sessionId=id).first()
+
+        if user is not None:
+             # do something with the user object
+             print("Random Code:")
+             print(user.sessionId)
+            # Set the session ID as a cookie
+             resp = make_response(render_template('touchGetCode.html',code=user.sessionId))
+             resp.set_cookie('id', id)
+             return resp
+        else:
+             # handle the case where no user object was found
+             print("Aktuelle User Id ist nicht vergeben")
+             return "ERROR: Die Session konnte nicht abgerufen werden!!!!!"
+
+@touch_blueprint.route('/RotOderBlau')
+def RotOderBlau():
+     return render_template('touchRotOderBlau.html')
 
 @touch_blueprint.route('/roteShow')
 def roteShow():
@@ -91,7 +89,7 @@ def RecordRoteShow():
     #Video records for 10 Seconds
     myCamera.update()
     myCamera.startVideoRecording()
-    time.sleep(5) 
+    time.sleep(10) 
     myCamera.stopVideoRecording()
 
 

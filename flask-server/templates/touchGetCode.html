@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head %}
+ {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Code</h1>
+     <p>Schreibe , fotografiere diesen Code , um spaeter dein Video runterzualten!!!!!! </p>  
+     <h1>{{code}}</h1> 
+
+     <a href="{{ url_for('touch.RotOderBlau') }}">
+        <button>Weiter</button>
+    </a>
+    <p>Previuos session id is: <strong>{{ request.cookies.get('id') }}</strong></p>
+    <p>Touchscreen</p>
+</div>
+{% endblock %}

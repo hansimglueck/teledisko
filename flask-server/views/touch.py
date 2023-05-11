@@ -26,6 +26,7 @@ def wait_for(condition_function, timeout=10, poll_interval=1):
 
 @touch_blueprint.route('/')
 def welcome():
+    print("serve index")
     return render_template('touchWelcome.html')
 
 @touch_blueprint.route('/WelcomeConfirm')
@@ -86,11 +87,15 @@ def roteShow():
 @touch_blueprint.route('/RecordRoteShow')
 def RecordRoteShow():
 
+    print("starting Camera for recording")
+
     #Video records for 10 Seconds
     myCamera.update()
     myCamera.startVideoRecording()
     time.sleep(10) 
+    print("stopping recording")
     myCamera.stopVideoRecording()
+    print("stopped")
 
 
     # Save the video file name to the database

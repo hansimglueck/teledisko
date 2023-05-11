@@ -21,5 +21,5 @@ if (__name__ == '__main__'):
     #     print('Creating database tables...')
     #     db.create_all()
     #     print('Done.')
-    app.run(debug=True, port=8000)
+    app.run(debug=True, host='0.0.0.0')
 

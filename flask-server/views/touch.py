@@ -7,6 +7,14 @@ from time import sleep
 from models import db, User
 from time import sleep
 from random import randint
+import socket
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+host = config['Player']['IP']
+port = int(config['Player']['Port'])
+
 
 myCamera = Camera()
 
@@ -92,7 +100,15 @@ def RecordRoteShow():
     #Video records for 10 Seconds
     myCamera.update()
     myCamera.startVideoRecording()
-    time.sleep(10) 
+    
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        
+        s.connect((host, port))
+        s.sendall(b'play')
+        response = s.recv(1024).decode('utf-8')
+        if response == 'complete':
+            print("Playback completed. Performing callback action.")
+
     print("stopping recording")
     myCamera.stopVideoRecording()
     print("stopped")

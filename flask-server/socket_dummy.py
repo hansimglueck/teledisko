@@ -1,18 +1,12 @@
 from flask import Flask, render_template
 import socket
 import configparser
+import threading
+from media_player import MediaPlayer
 
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-host = config['Player']['IP']
-port = int(config['Player']['Port'])
-
-
-# Flask-App erstellen
 app = Flask(__name__)
-
-choice = 'x'
+media_player = MediaPlayer()
 
 @app.route('/')
 def index():
@@ -20,53 +14,15 @@ def index():
 
 @app.route('/play')
 def play():
-    return render_template('play.html')
+    media_player.play()
+    return render_template('play.html') # onload in der seite
 
-@app.route('/complete')
-def complete():
-
-    # startRecord()
-
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((host, port))
-        s.sendall(b'play')
-        response = s.recv(1024).decode('utf-8')
-        if response == 'complete':
-            print("Playback completed. Performing callback action.")
-
-    # stopRecord()
-
-    return 'player completed!'
+@app.route('/playing')
+def playing():
+    media_player.wait_for_complete()  # Wait for the complete event to be set
+    print("complete")
+    return 'complete'
 
 
-
-
-
-
-@app.route('/a')
-def a():
-    global choice
-    choice = 'a'
-    return 'A'
-
-@app.route('/b')
-def b():
-    global choice
-    print(choice)
-    choice = 'b'
-    return 'B'
-
-@app.route('/test')
-def test():
-    global choice
-    print(choice)
-    return choice
-
-
-
-
-
-
-# Server starten
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

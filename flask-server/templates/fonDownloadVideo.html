@@ -17,7 +17,8 @@
     <a href="{{ url_for('index') }}">
         <button >Back to Anafang</button>
     </a>
-    <a href="{{video_link}}" download>Videolink</a>
+    <p>{{ url_for('download', session_id=session_id) }}</p>
+    <a href="{{ url_for('download', session_id=session_id) }}">Download Video</a>
     <p>Touchscreen</p>
 </div>
 {% endblock %}

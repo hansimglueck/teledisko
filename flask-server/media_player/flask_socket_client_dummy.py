@@ -1,9 +1,5 @@
 from flask import Flask, render_template
-import socket
-import configparser
-import threading
 from media_player import MediaPlayer
-
 
 app = Flask(__name__)
 media_player = MediaPlayer()
@@ -22,7 +18,6 @@ def playing():
     media_player.wait_for_complete()  # Wait for the complete event to be set
     print("complete")
     return 'complete'
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

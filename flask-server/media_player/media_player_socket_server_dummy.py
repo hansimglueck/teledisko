@@ -32,8 +32,8 @@ def main():
     config = configparser.ConfigParser()
     config.read('../config.ini')
 
-    host = config['Player']['IP']
-    port = int(config['Player']['Port'])
+    host = config['MediaPlayer']['IP']
+    port = int(config['MediaPlayer']['Port'])
     print(port, host)
     server = socketserver.TCPServer((host, port), PlayerHandler)
 

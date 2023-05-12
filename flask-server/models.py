@@ -11,3 +11,6 @@ class User(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.utcnow)
     qrLoadedFlag = db.Column(db.Boolean, default=False)
     videoReayToDownloadFlag = db.Column(db.Boolean, default=False)
+    downloaded = db.Column(db.Boolean, default=False)  # Add this line
+    
+

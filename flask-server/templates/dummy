@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container-rot">
+
+    <h1>RoteShow Ende!</h1>
+    <p>Die VideoCapture Aufnahme ist zuende</p>
+    <p>Auf deinen Handy muesste Jetzt dein Video Download Link zu sehen sein</p>
+    
+    <p>Oder</p>
+    <p>Schaue es hier direkt auf dem Touchscrren an</p>
+    <p><video src="{{video_link}}" controls></video></p>
+    <a href="{{ url_for('index') }}">
+        <button >Back to Anafang</button>
+    </a>
+    <a href="{{ url_for('download', session_id=session_id) }}">Download Video</a>
+    <p>Touchscreen</p>
+</div>
+{% endblock %}

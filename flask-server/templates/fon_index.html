@@ -1,15 +1,45 @@
 {% extends "base.html" %}
-{% block head %}
 
+{% block head %}
+<style>
+    #session_id {
+        font-size: 44px;
+        text-align: center;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+</style>
 {% endblock %}
+
 
 {% block body %}
 <div class="container">
-
-<form action="/" method="POST">
-    <label for="session_id">Enter Session ID:</label><br>
-    <input type="text" id="session_id" name="session_id"><br><br>
-    <input type="submit" value="Submit">
+  <form action="/" method="POST">
+    <div class="form-group">
+      <label for="session_id">Code:</label>
+      <input type="text" id="session_id" name="session_id" pattern="\d{6}" maxlength="6" title="Please enter five digits only" required>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Submit">
+    </div>
   </form>
 </div>
 {% endblock %}
+

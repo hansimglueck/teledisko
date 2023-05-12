@@ -36,6 +36,18 @@ def video_page(session_id):
     else:
         return redirect(url_for('index'))
 
+# @app.route('/download/<session_id>')
+# def download(session_id):
+#     user = User.query.filter_by(sessionId=session_id).first()
+#     if user and not user.downloaded:
+#         user.downloaded = True
+#         db.session.commit()
+
+#         video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
+
+#         return send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
+#     else:
+#         return render_template('fon_video_downloaded.html')
 @app.route('/download/<session_id>')
 def download(session_id):
     user = User.query.filter_by(sessionId=session_id).first()
@@ -45,10 +57,20 @@ def download(session_id):
 
         video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
 
-        return send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
-    else:
-        return render_template('fon_video_downloaded.html')
+        return redirect(url_for('download_success', file=video_file))
 
+@app.route('/download_file/<file>')
+def download_file(file):
+    try:
+        return send_from_directory(app.config['STATIC_FOLDER'], file, as_attachment=True)
+    except Exception as e:
+        print(e)
+        return redirect(url_for('index'))  # Redirect to index in case of an error
+
+@app.route('/download_success')
+def download_success():
+    file = request.args.get('file')
+    return render_template('fon_download_success.html', file=file)
 
 
 if (__name__ == '__main__'):
@@ -56,5 +78,5 @@ if (__name__ == '__main__'):
     #   print('Creating database tables...')
     #   db.create_all()
     #   print('Done.')
-    app.run(debug=True, port= 8080)
+    app.run(debug=True, port= 8080 , host ='0.0.0.0')
 

@@ -4,14 +4,27 @@
 <script>
     // load page /qrLoaded on page load
     window.onload = function () {
-        window.location.href = "{{ url_for('touch.RecordRoteShow') }}";
+         window.location.href = "{{ url_for('touch.RecordRoteShow') }}";
+
+        var timeleft = 130;
+        var downloadTimer = setInterval(function () {
+            document.getElementById("countdown").innerHTML = timeleft + " seconds starts you show";
+            timeleft -= 1;
+            if (timeleft < 0) {
+                clearInterval(downloadTimer);
+                document.getElementById("countdown").innerHTML = "Finished"
+            }
+        }, 1000);
     }
+
+
 </script>
 {% endblock %}
 {% block body %}
 <div class="container-rot">
     <h1>!!!!!!!!RoteShow-Start!!!!!!!!</h1>
     <p>Die VideoCapture Aufnahme hat begonnen</p>
+    <p><h1 id="countdown"></h1></p>
    
 
   

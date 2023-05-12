@@ -1,23 +1,23 @@
-
 {% extends "base.html" %}
-
 {% block head %}
 
 {% endblock %}
 
 {% block body %}
-<div class="container">
 
-    <h1>Download Video</h1>
+<div class="container-rot">
+
+    <h1>RoteShow Ende!</h1>
+    <p>Die VideoCapture Aufnahme ist zuende</p>
+    <p>Auf deinen Handy muesste Jetzt dein Video Download Link zu sehen sein</p>
     
-    <p>Click the button below to download the video:</p>
-
-    <a href="{{video_link}}" download="">
-        <button>Download Video</button>
+    <p>Oder</p>
+    <p>Schaue es hier direkt auf dem Touchscrren an</p>
+    <p><video src="{{video_link}}" controls></video></p>
+    <a href="{{ url_for('index') }}">
+        <button >Back to Anafang</button>
     </a>
-
- 
-    <p>Aktuelle session id is: <strong>{{ request.cookies.get('id') }}</strong></p>
-    <p>Smarth-Phone</p>
+    <a href="{{video_link}}" download>Videolink</a>
+    <p>Touchscreen</p>
 </div>
 {% endblock %}

@@ -16,10 +16,14 @@ def index():
         session_id = request.form['session_id']
         user = User.query.filter_by(sessionId=session_id).first()
         if user:
-            return redirect(url_for('video_page', session_id=user.sessionId))
+            if user.downloaded:
+                return render_template('fon_video_downloaded.html')
+            else:
+                return redirect(url_for('video_page', session_id=user.sessionId))
         else:
             return render_template('fon_code_not_found.html')
     return render_template('fon_index.html')
+
 
 @app.route('/video/<session_id>')
 def video_page(session_id):
@@ -43,7 +47,7 @@ def download(session_id):
 
         return send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
     else:
-        return "This video has already been downloaded."
+        return render_template('fon_video_downloaded.html')
 
 
 

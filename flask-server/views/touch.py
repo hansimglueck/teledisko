@@ -166,21 +166,24 @@ def record_show():
     user.videoReayToDownloadFlag = True
     db.session.commit()
 
-    #return render_template('1_wanna_change.html')
+    
+    onClick_Goto_route = "touch.info_wanna_change"  # Prepend blueprint name to the route
+
+    return render_template('1_wanna_change.html', onClick_Goto_route=onClick_Goto_route)
      
      # THIS COE BLOCK IS FOR TESTTING
      # LATER I WILL BE REMOVE
-    last_entry = User.query.order_by(User.createdAt.desc()).first()
+    # last_entry = User.query.order_by(User.createdAt.desc()).first()
 
-    if last_entry is not None:
+    # if last_entry is not None:
 
-        print(last_entry.videoFile)
-        video_url = last_entry.videoFile
-        print(video_url)
-        return render_template('7_ende_show.html',video_url=video_url)
-    else:
+    #     print(last_entry.videoFile)
+    #     video_url = last_entry.videoFile
+    #     print(video_url)
+    #     return render_template('7_ende_show.html',video_url=video_url)
+    # else:
 
-        return"Die VideoUrl konnte nicht ausgelesen werden"
+    #     return"Die VideoUrl konnte nicht ausgelesen werden"
 
 
 

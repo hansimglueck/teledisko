@@ -13,7 +13,7 @@ class PlayerHandler(socketserver.BaseRequestHandler):
 
         elif self.data == 'play':
             print("Starting playback")
-            time.sleep(7)
+            time.sleep(20)
             print("Playback completed")
             self.request.sendall(b'complete')
 

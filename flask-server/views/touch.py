@@ -1,32 +1,23 @@
 # views/touch.py
 from flask import Blueprint, render_template, request, redirect, url_for, make_response
-from camera import Camera
+
 import time
 from datetime import datetime
 from time import sleep
 from models import db, User
 from time import sleep
 from random import randint
-# import socket
-# import configparser
 
-
-# config = configparser.ConfigParser()
-# config.read('config.ini')
-# host = config['Player']['IP']
-# port = int(config['Player']['Port'])
-
+from media_player.media_player import MediaPlayer
+from camera import Camera
+from door import Door
 
 ################################## DOOR-SENSOR   #####################################
-from door import Door
 myDoor = Door()
-
 ################################## INIT CAMERA   #####################################
-
 myCamera = Camera()
-
-
-
+################################## SOcket Mediaplayer   #####################################
+myMediaPlayer = MediaPlayer()
 ################################# WAIT FUNCTION ###########################################
 def wait_for(condition_function, timeout=10, poll_interval=1):
     start_time = time.time()
@@ -35,10 +26,6 @@ def wait_for(condition_function, timeout=10, poll_interval=1):
         if time.time() - start_time > timeout:
             raise TimeoutError("Timeout while waiting for condition.")
         sleep(poll_interval)
-
-
-
-
 ################################# INT  BLUE_PRINT ###########################################
 
 touch_blueprint = Blueprint("touch", __name__)
@@ -114,23 +101,14 @@ def wait_for_Door():
 @touch_blueprint.route('/RecordRoteShow')
 def RecordRoteShow():
 
-  
+    myMediaPlayer.play() # Send  via Socket to Raspi2 that he should start
 
     print("starting Camera for recording")
-
-    #Video records for 10 Seconds
     myCamera.update()
     myCamera.startVideoRecording()
+
     
-    # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        
-    #     s.connect((host, port))
-    #     s.sendall(b'play')
-    #     response = s.recv(1024).decode('utf-8')
-    #     if response == 'complete':
-    #         print("Playback completed. Performing callback action.")
-    
-    sleep(7)
+    myMediaPlayer.wait_for_complete()
     print("stopping recording")
     myCamera.stopVideoRecording()
     print("stopped")

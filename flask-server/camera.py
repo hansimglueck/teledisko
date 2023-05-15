@@ -15,9 +15,10 @@ class Camera:
         self.picam2 = Picamera2()
         
 
-        controls = {"ExposureTime": 3000, "AnalogueGain": 1.0}
+        #controls = {"ExposureTime": 3000, "AnalogueGain": 1.0}
+        #video_config = self.picam2.create_video_configuration(main={"size": (640, 480)},controls=controls)
         
-        video_config = self.picam2.create_video_configuration(main={"size": (640, 480)},controls=controls)
+        video_config = self.picam2.create_video_configuration(main={"size": (640, 480)})
         self.picam2.configure(video_config)
         self.encoder = H264Encoder(10000000)
         self.videoFileName = 'static/videos/test-' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'

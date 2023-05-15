@@ -3,6 +3,8 @@
 			margin: 0;
 			padding: 0;
 			background-color: hsl(0, 0%, 0%);
+			font-family: Arial, Helvetica, sans-serif;
+			font-weight: bold;
 		}
 
 		.container {
@@ -24,8 +26,8 @@
 			justify-content: center;
 			align-items: center;
 			height: 100vh;
-			border-radius: 90px;
-			background-color: rgba(191, 191, 245, 0.267);
+			/* border-radius: 90px;
+			background-color: rgba(191, 191, 245, 0.267); */
 		}
 
 		.container-rot {
@@ -34,14 +36,14 @@
 			justify-content: center;
 			align-items: center;
 			height: 100vh;
-			border-radius: 90px;
-			background-color: rgba(241, 82, 82, 0.267);
+			/* border-radius: 90px;
+			background-color: rgba(241, 82, 82, 0.267); */
 		}
 
 		h1, label{
 			font-size: 48px;
 			font-weight: bold;
-			color: #333333;
+			color: #ffffff;
 			margin-bottom: 20px;
 		}
 
@@ -50,8 +52,8 @@
 		}
 
 		p {
-			font-size: 24px;
-			color: #666666;
+			font-size: 30px;
+			color: #ffffff;
 			margin-bottom: 40px;
 		}
 

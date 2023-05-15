@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+
+<script>
+    // load page /qrLoaded on page load
+    window.onload = function () {
+        window.location.href = "{{ url_for(onLoad_Goto_route) }}";
+    }
+</script>
+
+{% endblock %}
+{% block body %}
+
+	<div class="container">
+	 <img src="{{ url_for('static', filename='images/image_5.jpeg') }}">
+	</div>
+ 
+{% endblock %}

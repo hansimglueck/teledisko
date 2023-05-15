@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+
+
 {% block head %}
 
 <script>
     // load page /qrLoaded on page load
     window.onload = function () {
-         window.location.href = "{{ url_for('touch.record_show') }}";
-
+        window.location.href = "{{ url_for(onLoad_Goto_route) }}";
+    
+     // Count DOWN ANIMATION
         var timeleft = 20;
         var downloadTimer = setInterval(function () {
             document.getElementById("countdown").innerHTML = timeleft + " seconds starts you show";
@@ -16,19 +19,15 @@
             }
         }, 1000);
     }
-
-
 </script>
+
 {% endblock %}
 {% block body %}
-<div class="container-rot">
-    <h1>!!!!!!!!RoteShow-Start!!!!!!!!</h1>
-    <p>Die VideoCapture Aufnahme hat begonnen</p>
-    <p><h1 id="countdown"></h1></p>
-   
 
-  
-    </a>
-    <p>Touchscreen</p>
-</div>
+	<div class="container">
+     <p><h1 id="countdown"></h1></p>
+	 <img src="{{ url_for('static', filename='images/image_6.jpeg') }}">
+   
+	</div>
+ 
 {% endblock %}

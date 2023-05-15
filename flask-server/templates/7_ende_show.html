@@ -13,11 +13,11 @@
     
     <p>Oder</p>
     <p>Schaue es hier direkt auf dem Touchscrren an</p>
-    <p><video src="{{video_link}}" controls></video></p>
-    <a href="{{ url_for('index') }}">
-        <button >Back to Anafang</button>
+    <p><video src="{{video_url}}" controls></video></p>
+    <a href="{{ url_for('touch.wanna_change') }}">
+        <button >Back to Wanna Change</button>
     </a>
-    <a href="{{ url_for('download', session_id=session_id) }}">Download Video</a>
-    <p>Touchscreen</p>
+    <a href="{{video_url}}" download>Videolink</a>
+  
 </div>
 {% endblock %}

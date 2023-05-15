@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+{% block body %}
+
+	<div class="container">
+
+		<a href="{{ url_for('touch.WelcomeConfirm') }}">
+			<img src="{{ url_for('static', filename='images/image_1.jpeg') }}" alt="Your image description">
+		</a>
+		
+	</div>
+ 
+{% endblock %}

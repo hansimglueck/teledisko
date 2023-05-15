@@ -2,7 +2,7 @@
 		body {
 			margin: 0;
 			padding: 0;
-			background-color: #ffffff;
+			background-color: hsl(0, 0%, 0%);
 		}
 
 		.container {
@@ -11,8 +11,8 @@
 			justify-content: center;
 			align-items: center;
 			height: 100vh;
-			border-radius: 90px;
-			background-color: rgba(255, 255, 255, 0.267);
+			/* border-radius: 90px;
+			background-color: rgba(255, 255, 255, 0.267); */
 		}
 
 		
@@ -72,4 +72,9 @@
 
 		video {
 			transform: rotate(0deg);
+		  }
+		  
+		  img {
+			max-width: 100%;
+			max-height: 100%;
 		  }

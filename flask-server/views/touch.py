@@ -8,7 +8,7 @@ from models import db, User
 from time import sleep
 from random import randint
 
-from media_player.media_player import MediaPlayer
+from media_player import MediaPlayer
 from camera import Camera
 from door import Door
 
@@ -30,11 +30,18 @@ def wait_for(condition_function, timeout=10, poll_interval=1):
 
 touch_blueprint = Blueprint("touch", __name__)
 
-
+############################ 1. WANNA CHANGE ################################
 @touch_blueprint.route('/')
-def welcome():
-    print("serve index")
-    return render_template('touchWelcome.html')
+def wanna_change():
+    print("wanna_change")
+    return render_template('1_wanna_change.html')
+
+
+
+
+
+
+
 
 @touch_blueprint.route('/WelcomeConfirm')
 def WelcomeConfirm():
@@ -94,7 +101,12 @@ def preShow():
 @touch_blueprint.route('/wait_for_Door')
 def wait_for_Door():
      
-    #DIE TUER IST GESCHO
+    #DIE TUER IST GESCHLossen
+     print("Dir Tuer ist geschlossen")
+     print("Oeffne die Tuer ")
+     print("Und schliesse Sie")
+     print ("Damit die Show beginnt")
+     
      myDoor.wait_for_closing() 
      return render_template('roteShowStart.html')
 

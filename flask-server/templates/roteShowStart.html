@@ -6,7 +6,7 @@
     window.onload = function () {
          window.location.href = "{{ url_for('touch.RecordRoteShow') }}";
 
-        var timeleft = 130;
+        var timeleft = 20;
         var downloadTimer = setInterval(function () {
             document.getElementById("countdown").innerHTML = timeleft + " seconds starts you show";
             timeleft -= 1;

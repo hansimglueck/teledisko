@@ -7,20 +7,27 @@ from time import sleep
 from models import db, User
 from time import sleep
 from random import randint
-import socket
-import configparser
+# import socket
+# import configparser
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-host = config['Player']['IP']
-port = int(config['Player']['Port'])
 
+# config = configparser.ConfigParser()
+# config.read('config.ini')
+# host = config['Player']['IP']
+# port = int(config['Player']['Port'])
+
+
+################################## DOOR-SENSOR   #####################################
+from door import Door
+myDoor = Door()
+
+################################## INIT CAMERA   #####################################
 
 myCamera = Camera()
 
 
-touch_blueprint = Blueprint("touch", __name__)
 
+################################# WAIT FUNCTION ###########################################
 def wait_for(condition_function, timeout=10, poll_interval=1):
     start_time = time.time()
 
@@ -30,6 +37,11 @@ def wait_for(condition_function, timeout=10, poll_interval=1):
         sleep(poll_interval)
 
 
+
+
+################################# INT  BLUE_PRINT ###########################################
+
+touch_blueprint = Blueprint("touch", __name__)
 
 
 @touch_blueprint.route('/')
@@ -88,12 +100,21 @@ def GetCode():
 def RotOderBlau():
      return render_template('touchRotOderBlau.html')
 
-@touch_blueprint.route('/roteShow')
-def roteShow():
+@touch_blueprint.route('/preShow')
+def preShow():
+     return render_template('preShow.html')
+
+@touch_blueprint.route('/wait_for_Door')
+def wait_for_Door():
+     
+    #DIE TUER IST GESCHO
+     myDoor.wait_for_closing() 
      return render_template('roteShowStart.html')
 
 @touch_blueprint.route('/RecordRoteShow')
 def RecordRoteShow():
+
+  
 
     print("starting Camera for recording")
 
@@ -101,14 +122,15 @@ def RecordRoteShow():
     myCamera.update()
     myCamera.startVideoRecording()
     
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         
-        s.connect((host, port))
-        s.sendall(b'play')
-        response = s.recv(1024).decode('utf-8')
-        if response == 'complete':
-            print("Playback completed. Performing callback action.")
-
+    #     s.connect((host, port))
+    #     s.sendall(b'play')
+    #     response = s.recv(1024).decode('utf-8')
+    #     if response == 'complete':
+    #         print("Playback completed. Performing callback action.")
+    
+    sleep(7)
     print("stopping recording")
     myCamera.stopVideoRecording()
     print("stopped")

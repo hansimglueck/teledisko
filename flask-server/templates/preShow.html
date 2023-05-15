@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+    // load page /qrLoaded on page load
+    window.onload = function () {
+        window.location.href = "{{ url_for('touch.wait_for_Door') }}";
+    }
+</script>
+ {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>LOs gehts</h1>
+    <h1>“Gehe Zur KAbine , oeffne Die Tur”</h1>
+    <h1>“Esrt beim schliesen , der Tuer startet dein Erlebnis”</h1>
+
+
+
+    <p>Touchscreen</p>
+</div>
+{% endblock %}

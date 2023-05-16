@@ -7,18 +7,13 @@
 
 <div class="container-rot">
 
-    <h1>RoteShow Ende!</h1>
-    <p>Die VideoCapture Aufnahme ist zuende</p>
-    <p>Auf deinen Handy muesste Jetzt dein Video Download Link zu sehen sein</p>
-    
-    <p>Oder</p>
-    <p>Schaue es hier direkt auf dem Touchscrren an</p>
+    <h1>DOWNLOAD VIDEO</h1>
     <p><video src="{{video_link}}" controls></video></p>
+
+    <a href="{{ url_for('download', session_id=session_id) }}">
+        <button >DOWNLOAD VIDEO</button>
+    </a>  <a href="{{ url_for('download', session_id=session_id) }}">
     <a href="{{ url_for('index') }}">
-        <button >Back to Anafang</button>
-    </a>
-    <p>{{ url_for('download', session_id=session_id) }}</p>
-    <a href="{{ url_for('download', session_id=session_id) }}">Download Video</a>
-    <p>Touchscreen</p>
+       CODE EINAGBEo</a>
 </div>
 {% endblock %}

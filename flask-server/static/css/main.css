@@ -1,44 +1,32 @@
 
-		body {
-			margin: 0;
-			padding: 0;
-			background-color: hsl(0, 0%, 0%);
-			font-family: Arial, Helvetica, sans-serif;
-			font-weight: bold;
-		}
+.body {
 
-		.container {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			/* border-radius: 90px;
-			background-color: rgba(255, 255, 255, 0.267); */
-		}
+	background-color: #000000;
+  
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	min-height: 100%;
+	margin: 0;
+  }
+  
+  
+  .container-4 {
+	display: flex; 
+	justify-content:center;
+	align-items: center; 
+	height: 100vh;
+	flex-direction: column;
+  }
+  
+  
+  .image-2 {
+	padding-left: 146px;
+  }
+  
+  
 
-		
 
-
-		.container-blau {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			/* border-radius: 90px;
-			background-color: rgba(191, 191, 245, 0.267); */
-		}
-
-		.container-rot {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			/* border-radius: 90px;
-			background-color: rgba(241, 82, 82, 0.267); */
-		}
 
 		h1, label{
 			font-size: 48px;
@@ -66,17 +54,18 @@
 			font-size: 24px;
 			border-radius: 5px;
 			cursor: pointer;
-		}         
+			position: absolute ;
+			top: -200px;
+			left: 0px;
+		}   
 
 		button:hover {
 			background-color: #3E8E41;
+			
 		}
 
 		video {
 			transform: rotate(0deg);
 		  }
 		  
-		  img {
-			max-width: 100%;
-			max-height: 100%;
-		  }
+	

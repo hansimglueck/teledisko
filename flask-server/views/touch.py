@@ -9,6 +9,9 @@ from random import randint
 from media_player import MediaPlayer
 from camera import Camera
 from door import Door
+import random
+import string
+
 
 
 ############################################################################
@@ -77,16 +80,36 @@ def get_code_for_video():
     print("4_get_code_for_video")
     
     # Create a Random Code for Doenlaod Video
-    id = str(randint(0, 1000000))
-    print("Aktuelle Code:")
-    print(id)
+    # id = str(randint(0, 1000000))
+    # print("Aktuelle Code:")
+    # print(id)
+
+    # Generate a random number with 2 digits
+    random_number = random.randint(10, 99)
+
+    # Generate a random string with 2 characters
+    random_chars = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=2))
+
+    # Combine the random number and random characters with a space in between
+    random_code = f"{random_number}{random_chars}"
+
+    # Check if the random code already exists in the database
+    while User.query.filter_by(sessionId=random_code).first() is not None:
+        print("Random code already exists in the database. Regenerating...")
+        # Regenerate the random code
+        random_number = random.randint(10, 99)
+        random_chars = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=2))
+        random_code = f"{random_number}{random_chars}"
+
+    print("Current Code:")
+    print(random_code)
     
     # Save it to database 
-    user = User(sessionId=id)
+    user = User(sessionId=random_code)
     db.session.add(user)
     db.session.commit()
          
-    user = User.query.filter_by(sessionId=id).first()
+    user = User.query.filter_by(sessionId=random_code).first()
 
     if user is not None:
         # do something with the user object
@@ -95,7 +118,7 @@ def get_code_for_video():
         # Set the session ID as a cookie
         onClick_Goto_route = "touch.get_ready_for_show"  # Prepend blueprint name to the route
         resp = make_response(render_template('4_get_Code_for_Video.html',code=user.sessionId, onClick_Goto_route=onClick_Goto_route))
-        resp.set_cookie('id', id)
+        resp.set_cookie('id',random_code)
         return resp
     else:
         # handle the case where no user object was found

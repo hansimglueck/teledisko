@@ -1,20 +1,23 @@
-{% extends "base.html" %}
-{% block head %}
+{% extends "base_fon.html" %}
 
+{% block head %}
 {% endblock %}
 
+
 {% block body %}
+<div class="container-fon">
 
-<div class="container-rot">
 
-    <h1>DOWNLOAD VIDEO</h1>
-    <p><video src="{{video_link}}" controls></video></p>
+    <div class="form-group">
+        <div class="fon_logo">
+            <img style="width: 73px;" src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}"
+                alt="FON Logo">
+        </div>
 
-    <a href="{{ url_for('download', session_id=session_id) }}">
-        DOWNLOAD VIDEO
-    </a>  <br>
-    <a href="{{ url_for('download', session_id=session_id) }}">
-    <a href="{{ url_for('index') }}">
-       CODE EINAGBEo</a>
+        <a href="{{ url_for('download', session_id=session_id) }}"> <button class="btn_try_again">DOWNLOAD YOUR VIDEO
+                NOW</button></a>
+
+        <!-- <p><video src="{{video_link}}" controls></video></p> -->
+    </div>
 </div>
 {% endblock %}

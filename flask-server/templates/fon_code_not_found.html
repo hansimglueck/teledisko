@@ -1,14 +1,36 @@
-{% extends "base.html" %}
-{% block head %}
+{% extends "base_fon.html" %}
 
+{% block head %}
 {% endblock %}
 
-{% block body %}
-<div class="container">
 
-  <h1>Der Code gibt es nicht Rechreibfehler????.</h1>
-  <a href="{{ url_for('index') }}">
-    <button>Proboiers nochmal</button>
-</a>
+{% block body %}
+<div class="container-fon">
+  <div class="form-group">
+    <div class="fon_logo">
+      <img style="width: 73px;" src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="FON Logo">
+    </div>
+
+    <div class="title-fon-index">
+      <h1>SORRY, BUT YOU MUST</h1><br>
+      <h1>HAVE USED THE </h1><br>
+      <h1>WRONG PASSWORD</h1><br>
+    </div>
+
+    <div class="title-fon-index">
+      <h1>HAVE YUO ALREADY</h1><br>
+      <h1>TRIED THE OTHER </h1><br>
+      <h1>BUTTON?</h1><br>
+    </div>
+
+    <div class="title-fon-index">
+      <h1>WE WILL </h1><br>
+      <h1>TRIED THE OTHER </h1><br>
+      <h1>BUTTON?</h1><br>
+    </div>
+
+  
+    <a href="{{ url_for('index') }}"> <button class="btn_try_again">TRY AGAIN</button></a>
+  </div>
 </div>
 {% endblock %}

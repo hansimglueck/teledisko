@@ -50,6 +50,12 @@ def download(session_id):
 
         try:
             response = send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
+
+            # Delete the video file
+            # video_path = os.path.join(app.config['STATIC_FOLDER'], video_file)
+            # if os.path.exists(video_path):
+            #     os.remove(video_path)
+
             user.downloaded = True
             db.session.commit()
             return response

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+   /* Add this @font-face rule to load your custom font */
+   @font-face {
+      font-family: 'UniviaProUltra-Italic';
+      src: url('UniviaProUltra-Italic.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
+
+    html, body{
+      background-color: #1b262c;
+      text-align:center;
+      font-family: 'UniviaProUltra-Italic';
+      height: 100%;
+  margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+
+
+    .timer{
+      position: relative;
+    }
+
+    .time {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%)
+    }
+
+    .time{
+      font-size: 30px;
+      color: #fff;
+   
+      font-weight: bold;
+    }
+
+    svg{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    circle{
+      stroke-width: 10px;
+      fill: transparent;
+      stroke-linecap: butt;
+    }
+
+    #circle1{
+      stroke: #ffffff;
+    }
+
+    #circle2{
+      stroke:rgba(0,0,0, .01);
+      transition: 1s linear;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="timer">
+      <div class="time">
+        <span id="minute">1</span>:<span id="second">30</span>
+      </div>
+      <!-- <svg width="300" height="300">
+        <circle id="circle1" cx="150" cy="150" r="120"></circle>
+        <circle id="circle2" cx="150" cy="150" r="120"></circle>
+      </svg> -->
+      <svg width="200" height="200">
+        <circle id="circle1" cx="100" cy="100" r="70"></circle>
+        <circle id="circle2" cx="100" cy="100" r="70"></circle>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    const circle = document.getElementById('circle1');
+    const length = circle.getTotalLength();
+    const minute = document.getElementById('minute');
+    const second = document.getElementById('second');
+
+    circle.style.strokeDasharray = length;
+    circle.style.strokeDashoffset = 0;
+
+    let totalTime = 90; 
+    let count = totalTime; 
+    let timer;
+
+    function startTimer(){
+      timer = setInterval(function() {
+        count--;
+        if(count < 0) {
+          stopTimer();
+          return;
+        }
+        minute.textContent = Math.floor(count / 60);
+        second.textContent = (count % 60 < 10 ? '0' : '') + count % 60; // Added back the ternary operator for seconds
+        circle.style.strokeDashoffset = ((totalTime - count) / totalTime) * length;
+      }, 1000)
+    }
+
+    function stopTimer(){
+      clearInterval(timer);
+    }
+
+    // Start the timer when the page loads
+    startTimer();
+  </script>
+</body>
+</html>

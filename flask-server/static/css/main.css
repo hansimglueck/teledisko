@@ -169,16 +169,16 @@ body {
 	background-color: rgba(241, 82, 82, 0.267); */
 }
 
-h1, label{
+h1  {
 	font-size: 48px;
 	font-weight: bold;
 	color: #ffffff;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px;  */
 }
 
-form, input {
+/* form, input {
 	padding: 20px;
-}
+} */
 
 p {
 	font-size: 30px;
@@ -206,7 +206,39 @@ video {
 	transform: rotate(0deg);
 	}
 	
-	img {
+img {
 	max-width: 100%;
 	max-height: 100%;
 	}
+
+
+
+	@font-face {
+		font-family: 'UniviaProBook-Italic';
+		src: url('UniviaProBook-Italic.otf') format('opentype');
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+	  }
+	  @font-face {
+		font-family: 'UniviaProRegular';
+		src: url('UniviaProRegular.otf') format('opentype');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	  }
+	  @font-face {
+		font-family: 'UniviaProBook';
+		src: url('UniviaProBook.otf') format('opentype');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	  }
+
+	  @font-face {
+		font-family: 'UniviaProUltra-Italic';
+		src: url('UniviaProUltra-Italic.otf') format('opentype');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	  }

@@ -62,9 +62,23 @@ def strong_or_soft():
     
     print("3_strong_or_soft")
 
-    onClick_Goto_route = "touch.get_code_for_video"  # Prepend blueprint name to the route
+    onClick_Goto_route = "touch.DSGVO"  # Prepend blueprint name to the route
 
     return render_template('3_strong_or_soft.html', onClick_Goto_route=onClick_Goto_route)
+
+
+
+############################################################################
+############################ 3b. STRONG OR  SOFT ############################
+############################################################################
+@touch_blueprint.route('/DSGVO')
+def DSGVO():
+    
+    print("3a_DSGVO")
+
+    onClick_Goto_route = "touch.get_code_for_video"  # Prepend blueprint name to the route
+
+    return render_template('3b_DSGVO.html', onClick_Goto_route=onClick_Goto_route)
 
 
 
@@ -131,7 +145,7 @@ def wait_for_Door():
      print("Und schliesse Sie")
      print ("Damit die Show beginnt")
      
-     myDoor.wait_for_closing() 
+    #  myDoor.wait_for_closing() 
      
      onLoad_Goto_route = "touch.record_show"  # Prepend blueprint name to the route
      return render_template('6_please_wait_for_your_Turn.html', onLoad_Goto_route=onLoad_Goto_route)
@@ -143,7 +157,8 @@ def wait_for_Door():
 #####################################################################
 @touch_blueprint.route('/record_show')
 def record_show():
-
+    while(True):
+        pass
     myMediaPlayer.play() # Send  via Socket to Raspi2 that he should start
 
     print("starting Camera for recording")

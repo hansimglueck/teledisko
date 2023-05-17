@@ -1,6 +1,6 @@
 #static/videos/
 *.mp4
-
+*.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

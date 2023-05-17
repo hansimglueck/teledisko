@@ -4,13 +4,7 @@
 {% endblock %}
 {% block body %}
 
-	<div class="container-4">
+<div class="background wanna_change"></div>
+<a href="{{ url_for(onClick_Goto_route) }}" class="button wanna_change_button"></a>
 
-		<a href="{{ url_for(onClick_Goto_route) }}">
-			<img src="{{ url_for('static', filename='images/image_1.png') }}">
-			
-		</a>
-		<button >Back to Wanna Change</button>		
-	</div>
- 
 {% endblock %}

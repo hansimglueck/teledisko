@@ -5,7 +5,7 @@ from sensor_manager import SensorManager
 from logger import setup_logger
 
 
-config_file = '../config.ini'
+config_file = '../../config.ini'
 
 logger = setup_logger("flaskserver")
 

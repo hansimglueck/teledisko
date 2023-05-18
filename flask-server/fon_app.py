@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,send_from_directory
+from flask import Flask, render_template, request, redirect, url_for,send_from_directory,abort
 from config import Config
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
@@ -47,7 +47,7 @@ def download(session_id):
     user = User.query.filter_by(sessionId=session_id).first()
     if user and not user.downloaded:
         video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
-
+        print(video_file)
         try:
             response = send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
 

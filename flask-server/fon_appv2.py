@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory,abort
 from config import Config
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
@@ -25,20 +25,19 @@ def index():
         else:
             return render_template('fon_code_not_found.html')
     return render_template('fon_index.html')
-    # return render_template('fon_download_success.html')
-
-
+    # return render_template('fon_prepare_download.html')
 
 
 
 @app.route('/prepare_download/<session_id>')
 def prepare_download(session_id):
-    return render_template('prepare_download.html', session_id=session_id)
+    return render_template('fon_prepare_download.html', session_id=session_id)
 
 
 @app.route('/download/<session_id>')
 def download(session_id):
     user = User.query.filter_by(sessionId=session_id).first()
+    
     if user and not user.downloaded:
         video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
         try:

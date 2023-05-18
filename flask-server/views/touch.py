@@ -167,8 +167,10 @@ def wait_for_Door():
      print("Oeffne die Tuer ")
      print("Und schliesse Sie")
      print ("Damit die Show beginnt")
-     
-    #  myDoor.wait_for_closing() 
+
+     #########################
+     myDoor.wait_for_closing() 
+     #########################
      
      onLoad_Goto_route = "touch.record_show"  # Prepend blueprint name to the route
      return render_template('6_please_wait_for_your_Turn.html', onLoad_Goto_route=onLoad_Goto_route)
@@ -180,9 +182,11 @@ def wait_for_Door():
 #####################################################################
 @touch_blueprint.route('/record_show')
 def record_show():
-    while(True):
-        pass
-    myMediaPlayer.play() # Send  via Socket to Raspi2 that he should start
+    # while(True):
+    #     pass
+    
+    # Send  via Socket to Raspi2 that he should start
+    myMediaPlayer.play() 
 
     print("starting Camera for recording")
     myCamera.update()
@@ -200,6 +204,7 @@ def record_show():
     # Save videoReayToDownloadFlag to the Database
     session_id = request.cookies.get('id')
     user = User.query.filter_by(sessionId=session_id).first()
+    print(myCamera.videoFileName)
     user.videoFile = myCamera.videoFileName
     user.videoReayToDownloadFlag = True
     db.session.commit()

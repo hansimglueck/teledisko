@@ -19,33 +19,63 @@
 	
   }
 
+ 
+
   @font-face {
 	font-family: 'UniviaProUltra-Italic';
 	src: url('UniviaProUltra-Italic.otf') format('opentype');
 	font-style: normal;
   }
-
-
- .body {
-	height: 100%;
+  body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 	margin: 0;
 	padding: 0;
-	background-color: black;
-	
-
+	background: black;
 }
 
-
-
-  .fon_logo {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; 
-    align-self: flex-start; 
-	padding-bottom: 100px;
+.container {
+	display: flex;
+	width: 364px;
+	height: 100vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: black;
 	padding-left: 20px;
-    /* width: 100px; */
+	padding-right: 20px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	position: relative;
 }
+
+.content {
+	height: calc(100vh - 40px);
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	max-height: 50px;
+	width: auto;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+
+
+
   
 
 .container-fon {
@@ -64,6 +94,31 @@
 	color: white;
 	line-height: 0px;
 }
+
+
+.title-fon-index-2{
+	font-family: 'UniviaProUltra-Italic';
+	font-size:27px;
+	color: white;
+	line-height: 5px;
+}
+
+.title-fon-index-3{
+
+	color: white;
+	font-size: 17px;
+	font-family: 'UniviaProBook';
+	line-height: 5px;
+}
+
+.title-fon-index-3{
+
+	color: white;
+	font-size: 17px;
+	font-family: 'UniviaProBook';
+	line-height: 5px;
+}
+
 
 
 .form-group {
@@ -109,6 +164,6 @@
   } 
 
 
-
+ */
 
  

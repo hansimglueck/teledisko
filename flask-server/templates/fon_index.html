@@ -5,24 +5,23 @@
 
 
 {% block body %}
-<div class="container-fon">
 
- 
-  <form class="form-group" action="/" method="POST">
-    <div class="fon_logo">
-      <img style="width: 73px;"src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="FON Logo">
-      </div> 
-    <div class="title-fon-index">
-      <h1>PLEASE TYPE IN YOUR</h1><br>
-      <h1>PASSWORD TO GET</h1><br>
-      <h1>YOUR VIDEO</h1><br>
+    <div class="container">
+
+        <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
+
+        <div class="content">
+          <div class="title-fon-index">
+            <h1>PLEASE TYPE IN YOUR</h1><br>
+            <h1>PASSWORD TO GET</h1><br>
+            <h1>YOUR VIDEO</h1><br>
+          </div>
+
+            <form class="form-group" action="/" method="POST">
+              <input type="text" id="session_id" name="session_id" placeholder="PASSWORD" required>
+              <input type="submit" value="SEND">
+            </form>
+
+        </div>
     </div>
-    <!-- <input type="text" id="session_id" name="session_id" pattern="\d{6}" maxlength="6" title="Please enter five digits only" required> -->
-    <!-- <input type="text" id="session_id" name="session_id" title="Please enter five digits only" required> -->
-    <input type="text" id="session_id" name="session_id" placeholder="PASSWORD" required>
-    <input type="submit" value="SEND">
-  </form>
-</div>
-{% endblock %}
-
-
+ {% endblock %}

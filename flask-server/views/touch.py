@@ -67,6 +67,7 @@ def strong_or_soft():
 
     onClick_Goto_route = "touch.DSGVO"  # Prepend blueprint name to the route
 
+    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
     return render_template('3_strong_or_soft.html', onClick_Goto_route=onClick_Goto_route)
 
 
@@ -185,20 +186,27 @@ def record_show():
     # while(True):
     #     pass
     
-    # Send  via Socket to Raspi2 that he should start
-    myMediaPlayer.play() 
+    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
+    #TODO Send vis socket selectedShow= STRONG OR SOFT   so that reciver can paly the corresponding Video
+    #TOSO myMediaPlayer.selectSho(sletectedShow );
+    myMediaPlayer.play()  # Send  via Socket to Raspi2 that he should start
 
+    ######################################
     print("starting Camera for recording")
     myCamera.update()
     myCamera.startVideoRecording()
+    ######################################
 
     
     myMediaPlayer.wait_for_complete() # Blockking
 
+
+
+    ######################################
     print("stopping recording")
     myCamera.stopVideoRecording()
     print("stopped")
-
+    ######################################
 
     # Save the video file name to the database
     # Save videoReayToDownloadFlag to the Database

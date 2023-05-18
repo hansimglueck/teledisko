@@ -37,7 +37,7 @@ def prepare_download(session_id):
 @app.route('/download/<session_id>')
 def download(session_id):
     user = User.query.filter_by(sessionId=session_id).first()
-    
+
     if user and not user.downloaded:
         video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
         try:
@@ -56,4 +56,4 @@ def thanks():
     return render_template('fon_download_success.html')
 
 if (__name__ == '__main__'):
-    app.run(debug=True, port= 8082 , host ='0.0.0.0')
+    app.run(debug=True, port= 8083 , host ='0.0.0.0')

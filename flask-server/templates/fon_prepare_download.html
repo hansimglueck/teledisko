@@ -3,14 +3,7 @@
 
 {% block head %}
 
-<script>
-    document.getElementById('downloadLink').addEventListener('click', function() {
-        // wait 5 seconds, then redirect to the thank you page
-        setTimeout(function() {
-            window.location = "{{ url_for('thanks') }}";
-        }, 5000);
-    });
-    </script>
+
 {% endblock %}
 
 
@@ -27,7 +20,20 @@
     </div>
 
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('downloadLink').addEventListener('click', function() {
+            // wait 5 seconds, then redirect to the thank you page
+            setTimeout(function() {
+                window.location = "{{ url_for('thanks') }}";
+            }, 5000);
+        });
+    });
+</script>
+
 {% endblock %}
+
+
 
 
 

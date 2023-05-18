@@ -38,10 +38,6 @@ def video_page(session_id):
 
 
 
-
-
-from flask import abort
-
 @app.route('/download/<session_id>')
 def download(session_id):
     user = User.query.filter_by(sessionId=session_id).first()

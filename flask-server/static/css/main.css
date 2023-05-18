@@ -3,7 +3,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: hsl(0, 0%, 0%);
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'UniviaProUltra-Italic';
 	font-weight: bold;
 	width: 800px;
 	height: 1280px;
@@ -213,6 +213,7 @@ img {
 	max-height: 100%;
 	}
 
+/* ##########################CSS FONTS######################	*/
 
 
 	@font-face {
@@ -244,3 +245,43 @@ img {
 		font-style: normal;
 		font-display: swap;
 	  }
+
+
+/* ##########################CSS TIMER COUNTDOWN######################	*/
+
+.timer{
+	position: relative;
+  }
+
+  .time {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%)
+  }
+
+  .time{
+	font-size: 30px;
+	color: #fff;
+ 
+	font-weight: bold;
+  }
+
+  svg{
+	display: inline-block;
+	vertical-align: middle;
+  }
+  circle{
+	stroke-width: 10px;
+	fill: transparent;
+	stroke-linecap: butt;
+  }
+
+  #circle1{
+	stroke: #ffffff;
+  }
+
+  #circle2{
+	stroke:rgba(0,0,0, .01);
+	transition: 1s linear;
+  }

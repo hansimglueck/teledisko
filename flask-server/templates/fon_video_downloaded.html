@@ -1,3 +1,4 @@
+
 {% extends "base_fon.html" %}
 
 {% block head %}
@@ -5,20 +6,19 @@
 
 
 {% block body %}
-<div class="container-fon">
-    <div class="form-group">
 
-        <div class="fon_logo">
-            <img style="width: 73px;" src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}"
-                alt="FON Logo">
-        </div>
-        <div class="title-fon-index">
-            <h1>SORRY, BUT YOU HAVE</h1><br>
-            <h1>ALREADY DOWNLOADED </h1><br>
-            <h1>YOUR VIDEO</h1><br>
-        </div>
+<div class="container">
+  <div class="content">
+    <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
 
-        <a href="{{ url_for('index') }}"> <button class="btn_try_again">TRY AGAIN</button></a>
+    <div class="title-fon-index">
+        <h1>SORRY, BUT YOU HAVE</h1><br>
+        <h1>ALREADY DOWNLOADED </h1><br>
+        <h1>YOUR VIDEO</h1><br>
     </div>
+
+    <a href="{{ url_for('index') }}"> <button class="btn_try_again">TRY AGAIN</button></a>
+
+  </div>
 </div>
 {% endblock %}

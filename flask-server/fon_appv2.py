@@ -9,6 +9,9 @@ app.config['STATIC_FOLDER'] = 'static'
 app.config.from_object(Config)
 db.init_app(app)
 
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -22,10 +25,16 @@ def index():
         else:
             return render_template('fon_code_not_found.html')
     return render_template('fon_index.html')
+    # return render_template('fon_download_success.html')
+
+
+
+
 
 @app.route('/prepare_download/<session_id>')
 def prepare_download(session_id):
     return render_template('prepare_download.html', session_id=session_id)
+
 
 @app.route('/download/<session_id>')
 def download(session_id):
@@ -45,7 +54,7 @@ def download(session_id):
 
 @app.route('/thanks')
 def thanks():
-    return render_template('thanks.html')
+    return render_template('fon_download_success.html')
 
 if (__name__ == '__main__'):
     app.run(debug=True, port= 8082 , host ='0.0.0.0')

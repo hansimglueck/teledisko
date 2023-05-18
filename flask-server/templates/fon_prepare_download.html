@@ -1,0 +1,34 @@
+
+{% extends "base_fon.html" %}
+
+{% block head %}
+
+<script>
+    document.getElementById('downloadLink').addEventListener('click', function() {
+        // wait 5 seconds, then redirect to the thank you page
+        setTimeout(function() {
+            window.location = "{{ url_for('thanks') }}";
+        }, 5000);
+    });
+    </script>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+
+    <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
+
+    <div class="content">
+        
+        <a id="downloadLink" href="{{ url_for('download', session_id=session_id) }}"> <button class="btn_try_again">DOWNLOAD YOUR VIDEO
+            NOW</button></a>
+    </div>
+
+</div>
+{% endblock %}
+
+
+
+

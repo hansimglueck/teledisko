@@ -14,7 +14,8 @@ import string
 
 
 
-############################################################################
+################################### Global Variabel ########################
+selectedShow = "" # "red" or "blue"
 ################################## INIT DOOR-SENSOR   ######################
 myDoor = Door()
 ################################## INIT CAMERA   ###########################
@@ -23,7 +24,6 @@ myCamera = Camera()
 myMediaPlayer = MediaPlayer()
 ################################## INIT  BLUE_PRINT ########################
 touch_blueprint = Blueprint("touch", __name__)
-############################################################################
 ############################################################################
 
 
@@ -72,12 +72,21 @@ def strong_or_soft():
 
 
 
-############################################################################
-############################ 3b. STRONG OR  SOFT ############################
-############################################################################
-@touch_blueprint.route('/DSGVO')
-def DSGVO():
+##########################################################################
+############################ 3b. RED OR  BLUE ############################
+##########################################################################
+@touch_blueprint.route('/DSGVO/<selected_Show>')
+def DSGVO(selected_Show):
+
+
+    #TGete selectedShow (RED or BLUE)  is needed later in the route record_show
+    # to send via Mediaplayer via Socket 
+    global selectedShow 
+    selectedShow = selected_Show
+    print("The User seletec ShoW :") 
+    print(selectedShow)
     
+
     print("3a_DSGVO")
 
     onClick_Goto_route = "touch.get_code_for_video"  # Prepend blueprint name to the route
@@ -148,6 +157,9 @@ def get_code_for_video():
 @touch_blueprint.route('/get_ready_for_show')
 def get_ready_for_show():
     
+ 
+
+
     print("5_get_ready_for_show")
 
     onLoad_Goto_route = "touch.wait_for_Door"  # Prepend blueprint name to the route
@@ -163,6 +175,10 @@ def get_ready_for_show():
 @touch_blueprint.route('/wait_for_Door')
 def wait_for_Door():
      
+     global selectedShow 
+     print("Der  Gast hat folgende Show ausgewaehlt:") 
+     print(selectedShow)
+
     #DIE TUER IST GESCHLossen
      print("Dir Tuer ist geschlossen")
      print("Oeffne die Tuer ")
@@ -188,9 +204,11 @@ def record_show():
     
     #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
     #TODO Send vis socket selectedShow= STRONG OR SOFT   so that reciver can paly the corresponding Video
+    # global selectedShow = selected_Show
     #TOSO myMediaPlayer.selectSho(sletectedShow );
     myMediaPlayer.play()  # Send  via Socket to Raspi2 that he should start
-
+    
+    #RECO
     ######################################
     print("starting Camera for recording")
     myCamera.update()

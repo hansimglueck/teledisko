@@ -95,12 +95,12 @@ body {
 }
 
 .code_for_video_field {
-	top: 43%;
+	top: 45%;
 	left: 30%;
 	width: 40%;
-	height: 10%;
+	height: 15%;
 	background-color: black;
-	font-size: 800%;
+	font-size: 385%;
 	font-weight: lighter;
 }
 
@@ -138,80 +138,7 @@ body {
 
 
 
-.container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	/* border-radius: 90px;
-	background-color: rgba(255, 255, 255, 0.267); */
-}
 
-
-
-
-.container-blau {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	/* border-radius: 90px;
-	background-color: rgba(191, 191, 245, 0.267); */
-}
-
-.container-rot {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	/* border-radius: 90px;
-	background-color: rgba(241, 82, 82, 0.267); */
-}
-
-h1  {
-	font-size: 48px;
-	font-weight: bold;
-	color: #ffffff;
-	/* margin-bottom: 20px;  */
-}
-
-/* form, input {
-	padding: 20px;
-} */
-
-p {
-	font-size: 30px;
-	color: #ffffff;
-	margin-bottom: 40px;
-}
-
-/* button {
-	background-color: #4CAF50;
-	border: none;
-	color: white;
-	padding: 20px;
-	margin: 20px;
-	font-size: 24px;
-	border-radius: 5px;
-	cursor: pointer;
-}         
-
-button:hover {
-	background-color: #3E8E41;
-			
-} */
-
-video {
-	transform: rotate(0deg);
-	}
-	
-img {
-	max-width: 100%;
-	max-height: 100%;
-	}
 
 /* ##########################CSS FONTS######################	*/
 

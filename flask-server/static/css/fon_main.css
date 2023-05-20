@@ -1,0 +1,218 @@
+
+/* ################################################################### */
+/* ###################### CSS FUER TFONTS ################## */
+/* ################################################################### */
+@font-face {
+	font-family: 'UniviaProBook-Italic';
+	src: url('UniviaProBook-Italic.otf') format('opentype'),
+	     url('UniviaProBook-Italic.woff') format('woff'),
+	     url('UniviaProBook-Italic.woff2') format('woff2');
+
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+  }
+
+  @font-face {
+	font-family: 'UniviaProRegular';
+	src: url('UniviaProRegular.otf') format('opentype'),
+	     url('UniviaProRegular.woff') format('woff'),
+	     url('UniviaProRegular.woff2') format('woff2');
+
+	font-style: normal;
+
+  }
+  @font-face {
+	font-family: 'UniviaProBook';
+	src: url('UniviaProBook.otf') format('opentype'),
+		 url('UniviaProBook.woff') format('woff'),
+		 url('UniviaProBook.woff2') format('woff2');
+
+	font-style: normal;
+}
+
+
+  @font-face {
+	font-family: 'UniviaProUltra-Italic';
+	src: url('UniviaProUltra-Italic.otf') format('opentype'),
+	     url('UniviaProUltra-Italic.woff') format('woff'),
+	     url('UniviaProUltra-Italic.woff2') format('woff2');
+
+	font-style: italic;
+  }
+
+/* ################################################################### */
+/* ###################### BODY ################## */
+/* ################################################################### */
+
+
+  body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	background: black;
+}
+/* ################################################################### */
+/* ###################### CSS FUER  GLOABL LAYOYT CENTER MIT LOGO ################## */
+/* ################################################################### */
+.container {
+	display: flex;
+	width: 364px;
+	height: 100vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: black;
+	padding-left: 20px;
+	padding-right: 20px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	position: relative;
+}
+
+.content {
+	height: calc(100vh - 40px);
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.logo {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	max-height: 50px;
+	width: 73px;
+}
+
+
+
+
+
+/* ################################################################### */
+/* ###################### CSS FUER TEXTTABSCHNITTE ################## */
+/* ################################################################### */
+
+
+.title-fon-index{
+	font-family: 'UniviaProBook';
+	font-size: 13px;
+	color: white;
+	line-height: 0px;
+}
+
+
+.title-fon-index-2{
+	font-family: 'UniviaProUltra-Italic';
+	font-size:12px;
+	color: white;
+	line-height: 16px;
+}
+
+.title-fon-index-3{
+
+	color: white;
+	font-size: 17px;
+	font-family: 'UniviaProBook';
+	line-height: 5px;
+}
+
+
+.logo-inline-text{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 5px; /* Adjust the margin as needed */
+
+}
+
+.title-fon-index-sucess{
+	font-family: 'UniviaProBook';
+font-size: 12px;
+color: white;
+line-height: 0px;
+}
+
+
+.title-fon-index-2-sucess{
+
+	font-family: 'UniviaProUltra-Italic';
+font-size: 12px;
+color: white;
+line-height: 16px;
+
+}
+
+.title-fon-index-3-sucess{
+
+	color: white;
+font-size: 17px;
+font-family: 'UniviaProBook';
+line-height: 5px;
+
+}
+
+
+
+/* ################################################################### */
+/* ###################### CSS FUER CODE EINGABE FORMULAR M################## */
+/* ################################################################### */
+
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-family: 'UniviaProBook';
+  color: white;
+  font-size: 16px;
+  
+}
+
+.form-group input[type="text"] {
+	border: 2px solid white;
+	border-radius: 12px;
+	background-color: rgb(140, 140, 140);
+	color: white;
+	padding: 5px 5px 5px 10px;
+	font-size: 27px;
+	cursor: pointer;
+	width: 69%;
+	font-family: 'UniviaProBook';
+  }
+
+  .form-group input[type="text"]::placeholder {
+    
+	color: white !important;
+  }
+
+
+  .form-group input[type="submit"], .btn_try_again {
+	border: 2px solid white;
+	border-radius: 10px;
+	background-color: rgb(0, 0, 0);
+	color: white;
+	padding: 4px 20px 3px 20px;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: 'UniviaProBook';
+	text-align: center;
+	
+  } 
+
+  .btn_try_again {
+	margin-top:20px;
+  }
+
+
+
+
+
+ 

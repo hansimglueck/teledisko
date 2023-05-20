@@ -1,40 +1,27 @@
-{% extends "base.html" %}
+{% extends "base_fon.html" %}
 
 {% block head %}
-<style>
-    #session_id {
-        font-size: 44px;
-        text-align: center;
-    }
-
-    .container-fon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-
-</style>
 {% endblock %}
 
 
 {% block body %}
-<div class="container-fon">
-  <form class="form-group" action="/" method="POST">
-      <p>Code</p>
-      <!-- <input type="text" id="session_id" name="session_id" pattern="\d{6}" maxlength="6" title="Please enter five digits only" required> -->
-      <input type="text" id="session_id" name="session_id"  title="Please enter five digits only" required>
-      <input type="submit" value="Submit">
-    
-  </form>
+
+<div class="container">
+
+  <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
+
+  <div class="content">
+    <div class="title-fon-index">
+      <h1>PLEASE TYPE IN YOUR</h1><br>
+      <h1>PASSWORD TO GET</h1><br>
+      <h1>YOUR VIDEO</h1><br>
+    </div>
+
+    <form class="form-group" action="/" method="POST">
+      <input type="text" id="session_id" name="session_id" placeholder="PASSWORD" required>
+      <input type="submit" value="SEND">
+    </form>
+
+  </div>
 </div>
 {% endblock %}

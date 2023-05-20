@@ -14,7 +14,8 @@ import string
 
 
 
-############################################################################
+################################### Global Variabel ########################
+selectedShow = "" # "red" or "blue"
 ################################## INIT DOOR-SENSOR   ######################
 myDoor = Door()
 ################################## INIT CAMERA   ###########################
@@ -23,7 +24,6 @@ myCamera = Camera()
 myMediaPlayer = MediaPlayer()
 ################################## INIT  BLUE_PRINT ########################
 touch_blueprint = Blueprint("touch", __name__)
-############################################################################
 ############################################################################
 
 
@@ -67,21 +67,46 @@ def strong_or_soft():
 
     onClick_Goto_route = "touch.DSGVO"  # Prepend blueprint name to the route
 
+    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
     return render_template('3_strong_or_soft.html', onClick_Goto_route=onClick_Goto_route)
 
 
 
-############################################################################
-############################ 3b. STRONG OR  SOFT ############################
-############################################################################
-@touch_blueprint.route('/DSGVO')
-def DSGVO():
+##########################################################################
+############################ 3b. RED OR  BLUE ############################
+##########################################################################
+@touch_blueprint.route('/DSGVO/<selected_Show>')
+def DSGVO(selected_Show):
+
+
+    #TGete selectedShow (RED or BLUE)  is needed later in the route record_show
+    # to send via Mediaplayer via Socket 
+    global selectedShow 
+    selectedShow = selected_Show
+    print("The User seletec ShoW :") 
+    print(selectedShow)
     
+
     print("3a_DSGVO")
+
+    onClick_Goto_route = "touch.get_qr_and_wifi"  # Prepend blueprint name to the route
+
+    return render_template('3b_DSGVO.html', onClick_Goto_route=onClick_Goto_route)
+
+
+
+##########################################################################
+############################ 3c. GET QR AND WIFI ############################
+##########################################################################
+@touch_blueprint.route('/get_qr_and_wifi')
+def get_qr_and_wifi():
+
+
+    print("3c_get_qr_and_wifi")
 
     onClick_Goto_route = "touch.get_code_for_video"  # Prepend blueprint name to the route
 
-    return render_template('3b_DSGVO.html', onClick_Goto_route=onClick_Goto_route)
+    return render_template('3c_get_qr_and_wifi.html', onClick_Goto_route=onClick_Goto_route)
 
 
 
@@ -147,6 +172,9 @@ def get_code_for_video():
 @touch_blueprint.route('/get_ready_for_show')
 def get_ready_for_show():
     
+ 
+
+
     print("5_get_ready_for_show")
 
     onLoad_Goto_route = "touch.wait_for_Door"  # Prepend blueprint name to the route
@@ -162,13 +190,19 @@ def get_ready_for_show():
 @touch_blueprint.route('/wait_for_Door')
 def wait_for_Door():
      
+     global selectedShow 
+     print("Der  Gast hat folgende Show ausgewaehlt:") 
+     print(selectedShow)
+
     #DIE TUER IST GESCHLossen
      print("Dir Tuer ist geschlossen")
      print("Oeffne die Tuer ")
      print("Und schliesse Sie")
      print ("Damit die Show beginnt")
-     
-    #  myDoor.wait_for_closing() 
+
+     #########################
+     myDoor.wait_for_closing() 
+     #########################
      
      onLoad_Goto_route = "touch.record_show"  # Prepend blueprint name to the route
      return render_template('6_please_wait_for_your_Turn.html', onLoad_Goto_route=onLoad_Goto_route)
@@ -180,26 +214,38 @@ def wait_for_Door():
 #####################################################################
 @touch_blueprint.route('/record_show')
 def record_show():
-    while(True):
-        pass
-    myMediaPlayer.play() # Send  via Socket to Raspi2 that he should start
-
+    # while(True):
+    #     pass
+    
+    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
+    #TODO Send vis socket selectedShow= STRONG OR SOFT   so that reciver can paly the corresponding Video
+    # global selectedShow = selected_Show
+    #TOSO myMediaPlayer.selectSho(sletectedShow );
+    myMediaPlayer.play()  # Send  via Socket to Raspi2 that he should start
+    
+    #RECO
+    ######################################
     print("starting Camera for recording")
     myCamera.update()
     myCamera.startVideoRecording()
+    ######################################
 
     
     myMediaPlayer.wait_for_complete() # Blockking
 
+
+
+    ######################################
     print("stopping recording")
     myCamera.stopVideoRecording()
     print("stopped")
-
+    ######################################
 
     # Save the video file name to the database
     # Save videoReayToDownloadFlag to the Database
     session_id = request.cookies.get('id')
     user = User.query.filter_by(sessionId=session_id).first()
+    print(myCamera.videoFileName)
     user.videoFile = myCamera.videoFileName
     user.videoReayToDownloadFlag = True
     db.session.commit()

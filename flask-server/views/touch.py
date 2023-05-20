@@ -89,9 +89,24 @@ def DSGVO(selected_Show):
 
     print("3a_DSGVO")
 
-    onClick_Goto_route = "touch.get_code_for_video"  # Prepend blueprint name to the route
+    onClick_Goto_route = "touch.get_qr_and_wifi"  # Prepend blueprint name to the route
 
     return render_template('3b_DSGVO.html', onClick_Goto_route=onClick_Goto_route)
+
+
+
+##########################################################################
+############################ 3c. GET QR AND WIFI ############################
+##########################################################################
+@touch_blueprint.route('/get_qr_and_wifi')
+def get_qr_and_wifi():
+
+
+    print("3c_get_qr_and_wifi")
+
+    onClick_Goto_route = "touch.get_code_for_video"  # Prepend blueprint name to the route
+
+    return render_template('3c_get_qr_and_wifi.html', onClick_Goto_route=onClick_Goto_route)
 
 
 

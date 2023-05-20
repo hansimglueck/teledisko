@@ -16,7 +16,9 @@ from logger import setup_logger
 
 
 
-################################### Global Variabel ########################
+############################################################################
+logger = setup_logger("flaskserver")
+############################################################################
 selectedShow = "" # "red" or "blue" for Medoaiplayer
 ################################## INIT DOOR-SENSOR   ######################
 myDoor = Door()
@@ -27,7 +29,7 @@ myMediaPlayer = MediaPlayer()
 ################################## INIT  BLUE_PRINT ########################
 touch_blueprint = Blueprint("touch", __name__)
 ############################################################################
-logger = setup_logger("flaskserver")
+
 
 
 

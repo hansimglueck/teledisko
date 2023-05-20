@@ -85,7 +85,7 @@ def download(session_id):
     user = User.query.filter_by(sessionId=session_id).first()
 
     if user and not user.downloaded:
-        video_file = user.videoFile
+        video_file = user.v
         video_directory = '/media/alphi/BB42-5BFC/'
         app.config['UPLOAD_FOLDER'] = video_directory
         print( app.config['UPLOAD_FOLDER'] + video_file)

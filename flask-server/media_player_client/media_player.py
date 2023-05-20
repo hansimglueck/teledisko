@@ -1,11 +1,16 @@
 import threading
 import socket
 import configparser
+import os
 
 class MediaPlayer:
     def __init__(self):
+        # Pfad zur Konfigurationsdatei basierend auf dem Modulnamen
+        config_path = os.path.join(os.path.dirname(__file__), '../../config.ini')
+
+        # Konfigurationsdatei einlesen
         config = configparser.ConfigParser()
-        config.read('../../config.ini')
+        config.read(config_path)
         self.host = config['MediaPlayer']['IP']
         self.port = int(config['MediaPlayer']['Port'])
         self.response = None

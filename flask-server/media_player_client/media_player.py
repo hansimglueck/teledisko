@@ -30,10 +30,14 @@ class MediaPlayer:
 
         threading.Thread(target=play_thread).start()
 
-    def pause():
+    def pause(self):
         pass
 
-    def stop():
+    def stop(self):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((self.host, self.port))
+            message = f'stop'
+            s.sendall(message.encode('utf-8'))
         pass
 
     def wait_for_complete(self):

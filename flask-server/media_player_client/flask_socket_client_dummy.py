@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../')  # Hinzufügen des übergeordneten Verzeichnisses zum Python-Pfad
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from media_player import MediaPlayer
 
 app = Flask(__name__)
@@ -21,6 +21,11 @@ def play_blue():
     media_player.load("blue")
     media_player.play()
     return render_template('play.html',track_id="blue") # onload in der seite
+
+@app.route('/stop')
+def stop():
+    media_player.stop()
+    return redirect(url_for('index'))
 
 @app.route('/playing')
 def playing():

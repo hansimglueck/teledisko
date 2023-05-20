@@ -158,20 +158,28 @@ body {
 
 
 .get_ready_for_canceled_button{
+
 	border: 5px solid white;
-	border-radius: 31px;
+	border-radius: 3px;
 	background-color: rgb(0, 0, 0);
 	color: white;
-	padding: 10px 30px 15px 30px;
+	padding: ;
 	cursor: pointer;
-	font-size: 41px;
-	font-family: 'UniviaProBook';
+	font-size: 40px;
+	font-family: 'UniviaProRegular';
 	text-align: center;
 	top: 83%;
-	left: 56%;
-	width: 24%;
+	left: 59%;
+	width: 20%;
 	height: 5%;
+	padding: 10px;
+	  padding-left: 10px;
+	padding-left: 41px;
+	font-size: revert;
+	font-weight: 700;
 	}
+
+
 
 a:link { text-decoration: none; }
 

@@ -35,3 +35,4 @@ class Camera:
     def close_video(self):
         self.picam2.close()
         
+ 

@@ -1,20 +1,41 @@
-{% extends "base.html" %}
-{% block head %}
+{% extends "base_fon.html" %}
 
+{% block head %}
 {% endblock %}
+
 
 {% block body %}
 <div class="container">
 
-  <h1>DeinVideo wurde gerade runter geladen</h1>
-  <h1>Lust auf Blau</h1>
-  <h1>Bis Bald</h1>
-  <a href="{{ url_for('index') }}">
-    <button>HOME</button>
+  <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
+
+  <div class="content">
+
+    <div class="title-fon-index-sucess">
+      <h1>THANK YOU FOR BEING</h1>
+      <h1>PART OF THE
+          <span class="logo-inline-text"> 
+            <img style="width: 100px;"
+              src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="FON Logo">
+          </span>
+       </h1>
+      <h1>WORLD</h1>
+    </div>
+
+    <div class="title-fon-index-2-sucess">
+      <h1>HAVE YOU ALREADY</h1>
+      <h1>TRIED THE OTHER</h1>
+      <h1>BUTTON?</h1>
+    </div>
+
+    <div class="title-fon-index-3-sucess">
+      <p>WE WILL DELETE YOUR VIDEO</p>
+      <p>FROM OUR SERVER IN ONE HOUR</p>
+    
+    </div>
 
 
 
-
-</a>
+  </div>
 </div>
 {% endblock %}

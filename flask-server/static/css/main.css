@@ -3,11 +3,13 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: hsl(0, 0%, 0%);
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'UniviaProUltra-Italic';
 	font-weight: bold;
 	width: 800px;
 	height: 1280px;
 }
+
+
 
 .background {
 	position: fixed;
@@ -80,6 +82,27 @@ body {
 	height: 10%;
 }
 
+
+
+.get_qr_and_wifi {
+	background-image: url('../images/get_qr_and_wifi.png');
+}
+
+.get_qr_and_wifi_button {
+	top: 81%;
+	left: 48%;
+	width: 40%;
+	height: 10%;
+}
+
+
+
+
+
+
+
+
+
 .get_code_for_video
 {
 	background-image: url('../images/get_code_for_video.png');
@@ -93,10 +116,10 @@ body {
 }
 
 .code_for_video_field {
-	top: 43%;
+	top: 45%;
 	left: 30%;
 	width: 40%;
-	height: 10%;
+	height: 15%;
 	background-color: black;
 	font-size: 800%;
 	font-weight: lighter;
@@ -134,83 +157,36 @@ body {
 }
 
 
-
-
-.container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	/* border-radius: 90px;
-	background-color: rgba(255, 255, 255, 0.267); */
-}
-
-
-
-
-.container-blau {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	/* border-radius: 90px;
-	background-color: rgba(191, 191, 245, 0.267); */
-}
-
-.container-rot {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	/* border-radius: 90px;
-	background-color: rgba(241, 82, 82, 0.267); */
-}
-
-h1  {
-	font-size: 48px;
-	font-weight: bold;
-	color: #ffffff;
-	/* margin-bottom: 20px;  */
-}
-
-/* form, input {
-	padding: 20px;
-} */
-
-p {
-	font-size: 30px;
-	color: #ffffff;
-	margin-bottom: 40px;
-}
-
-button {
-	background-color: #4CAF50;
-	border: none;
+.get_ready_for_canceled_button{
+	border: 5px solid white;
+	border-radius: 31px;
+	background-color: rgb(0, 0, 0);
 	color: white;
-	padding: 20px;
-	margin: 20px;
-	font-size: 24px;
-	border-radius: 5px;
+	padding: 10px 30px 15px 30px;
 	cursor: pointer;
-}         
-
-button:hover {
-	background-color: #3E8E41;
-			
-}
-
-video {
-	transform: rotate(0deg);
-	}
-	
-img {
-	max-width: 100%;
-	max-height: 100%;
+	font-size: 41px;
+	font-family: 'UniviaProBook';
+	text-align: center;
+	top: 83%;
+	left: 56%;
+	width: 24%;
+	height: 5%;
 	}
 
+a:link { text-decoration: none; }
+
+a:visited { text-decoration: none; }
+
+a:hover { text-decoration: none; }
+
+a:active { text-decoration: none; }
+
+
+
+
+
+
+/* ##########################CSS FONTS######################	*/
 
 
 	@font-face {
@@ -242,3 +218,43 @@ img {
 		font-style: normal;
 		font-display: swap;
 	  }
+
+
+/* ##########################CSS TIMER COUNTDOWN######################	*/
+
+.timer{
+	position: relative;
+  }
+
+  .time {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%)
+  }
+
+  .time{
+	font-size: 30px;
+	color: #fff;
+ 
+	font-weight: bold;
+  }
+
+  svg{
+	display: inline-block;
+	vertical-align: middle;
+  }
+  circle{
+	stroke-width: 10px;
+	fill: transparent;
+	stroke-linecap: butt;
+  }
+
+  #circle1{
+	stroke: #ffffff;
+  }
+
+  #circle2{
+	stroke:rgba(0,0,0, .01);
+	transition: 1s linear;
+  }

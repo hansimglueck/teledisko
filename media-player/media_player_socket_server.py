@@ -7,10 +7,13 @@ import subprocess
 import signal
 import os
 
-red_wav = "/home/pi/teledisko/media-player/sound/red230519.wav"
-blue_wav = "/home/pi/teledisko/media-player/sound/blue230519.wav"
-red_video = "/home/pi/teledisko/media-player/video/TM.mov"
-blue_video = "/home/pi/teledisko/media-player/video/Elixyr_Logo_blue.mov"
+config_path = os.path.join(os.path.dirname(__file__), '../config.ini')
+config = configparser.ConfigParser()
+config.read(config_path)
+red_wav = config['MediaPlayer']['red_wav']
+blue_wav = config['MediaPlayer']['blue_wav']
+red_video = config['MediaPlayer']['red_video']
+blue_video = config['MediaPlayer']['blue_video']
 loaded = "red"
 audio_playback = None
 video_viewer_process = None
@@ -79,9 +82,6 @@ def stop_video_viewer(process):
     os.killpg(os.getpgid(process.pid), signal.SIGKILL)
 
 def main():
-    config = configparser.ConfigParser()
-    config.read('../config.ini')
-
     host = config['MediaPlayer']['IP']
     port = int(config['MediaPlayer']['Port'])
     print(port, host)

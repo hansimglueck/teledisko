@@ -6,7 +6,7 @@ from time import sleep
 from models import db, User
 from time import sleep
 from random import randint
-from media_player import MediaPlayer
+from media_player_client.media_player import MediaPlayer
 from camera import Camera
 from door import Door
 import random
@@ -218,9 +218,10 @@ def record_show():
     #     pass
     
     #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
-    #TODO Send vis socket selectedShow= STRONG OR SOFT   so that reciver can paly the corresponding Video
+    #TODO Send vis socket selectedShow= red or blue   so that reciver can play the corresponding Video
     # global selectedShow = selected_Show
     #TOSO myMediaPlayer.selectSho(sletectedShow );
+    myMediaPlayer.load(selectedShow)
     myMediaPlayer.play()  # Send  via Socket to Raspi2 that he should start
     
     #RECO

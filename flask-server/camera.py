@@ -10,6 +10,7 @@ class Camera:
         self.encoder = None
         self.output = None
         self.videoFileName = None
+        self.videoFilePath = None
     
     def update(self):
         self.picam2 = Picamera2()
@@ -22,8 +23,11 @@ class Camera:
         self.picam2.configure(video_config)
         self.encoder = H264Encoder(10000000)
         # self.videoFileName = 'static/videos/test-' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
-        self.videoFileName = '/media/alphi/BB42-5BFC/ElixirDisco' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
-        self.output = FfmpegOutput( self.videoFileName, audio=True )
+        #self.videoFileName = '/media/alphi/BB42-5BFC/ElixirDisco' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
+
+        self.videoFilePath = '/media/alphi/BB42-5BFC/'
+        self.videoFileName = 'ElixirDisco' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
+        self.output = FfmpegOutput( self.videoFilePath + self.videoFileName, audio=True )
 
 
     def startVideoRecording(self):

@@ -11,11 +11,13 @@ from camera import Camera
 from door import Door
 import random
 import string
+from logger import setup_logger
+
 
 
 
 ################################### Global Variabel ########################
-selectedShow = "" # "red" or "blue"
+selectedShow = "" # "red" or "blue" for Medoaiplayer
 ################################## INIT DOOR-SENSOR   ######################
 myDoor = Door()
 ################################## INIT CAMERA   ###########################
@@ -25,6 +27,7 @@ myMediaPlayer = MediaPlayer()
 ################################## INIT  BLUE_PRINT ########################
 touch_blueprint = Blueprint("touch", __name__)
 ############################################################################
+logger = setup_logger("flaskserver")
 
 
 
@@ -35,7 +38,7 @@ touch_blueprint = Blueprint("touch", __name__)
 @touch_blueprint.route('/')
 def wanna_change():
 
-    print("1_wanna_change")
+    logger.debug("1_wanna_change")
 
     onClick_Goto_route = "touch.info_wanna_change"  # Prepend blueprint name to the route
 
@@ -127,7 +130,7 @@ def get_code_for_video():
     random_number = random.randint(10, 99)
 
     # Generate a random string with 2 characters
-    random_chars = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=2))
+    random_chars = ''.join(random.choices(string.ascii_lowercase + string.ascii_lowercase, k=2))
 
     # Combine the random number and random characters with a space in between
     random_code = f"{random_number}{random_chars}"
@@ -137,7 +140,7 @@ def get_code_for_video():
         print("Random code already exists in the database. Regenerating...")
         # Regenerate the random code
         random_number = random.randint(10, 99)
-        random_chars = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=2))
+        random_chars = ''.join(random.choices(string.ascii_lowercase + string.ascii_lowercase, k=2))
         random_code = f"{random_number}{random_chars}"
 
     print("Current Code:")
@@ -242,12 +245,14 @@ def record_show():
     print("stopped")
     ######################################
 
-    # Save the video file name to the database
+    # Save the video file name  and path to the database
     # Save videoReayToDownloadFlag to the Database
     session_id = request.cookies.get('id')
     user = User.query.filter_by(sessionId=session_id).first()
     print(myCamera.videoFileName)
+    print(myCamera.videoFilePath)
     user.videoFile = myCamera.videoFileName
+    user.videoFilePath = myCamera.videoFilePath
     user.videoReayToDownloadFlag = True
     db.session.commit()
 

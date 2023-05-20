@@ -4,6 +4,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 
+
 app = Flask(__name__, static_url_path='/static')
 app.config['STATIC_FOLDER'] = 'static'
 app.config.from_object(Config)
@@ -58,24 +59,44 @@ def prepare_download(session_id):
 ###################3. Versendung  des Videofiles ##########################
 ############################################################################
 
+# @app.route('/download/<session_id>')
+# def download(session_id):
+
+#     user = User.query.filter_by(sessionId=session_id).first()
+
+#     if user and not user.downloaded:
+#         video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
+#         try:
+#             response = send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
+#             user.downloaded = True
+#             db.session.commit()
+
+#             return response
+#         except Exception as e:
+#             print(str(e))
+#             abort(500, description="Error during file download")
+#     else:
+#         return render_template('fon_video_downloaded.html')
+
+
+
 @app.route('/download/<session_id>')
 def download(session_id):
-
     user = User.query.filter_by(sessionId=session_id).first()
 
     if user and not user.downloaded:
-        video_file = user.videoFile[7:] if user.videoFile.startswith('static/') else user.videoFile
+        video_file = user.videoFile
+        video_directory = '/media/alphi/BB42-5BFC/'
+        app.config['UPLOAD_FOLDER'] = video_directory
+        print( app.config['UPLOAD_FOLDER'] + video_file)
         try:
-            response = send_from_directory(app.config['STATIC_FOLDER'], video_file, as_attachment=True)
-            user.downloaded = True
-            db.session.commit()
-
-            return response
+            return send_from_directory(app.config['UPLOAD_FOLDER'], video_file, as_attachment=True)
         except Exception as e:
             print(str(e))
             abort(500, description="Error during file download")
     else:
         return render_template('fon_video_downloaded.html')
+
     
 
 

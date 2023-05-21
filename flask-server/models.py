@@ -13,5 +13,8 @@ class User(db.Model):
     qrLoadedFlag = db.Column(db.Boolean, default=False)
     videoReayToDownloadFlag = db.Column(db.Boolean, default=False)
     downloaded = db.Column(db.Boolean, default=False)  # Add this line
+    videoDeleted = db.Column(db.Boolean, default=False)  # Add this line
+
+
     
 

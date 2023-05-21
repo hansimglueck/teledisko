@@ -17,13 +17,15 @@ from logger import setup_logger
 
 
 ############################################################################
-logger = setup_logger("flaskserver")
+random_code = None    # variable stores unic  generated code for  user
+############################################################################
+logger = setup_logger("flaskserver") # Debbuging Tool
 ############################################################################
 selectedShow = "" # "red" or "blue" for Medoaiplayer
 ################################## INIT DOOR-SENSOR   ######################
-myDoor = Door()
+myDoor = Door()           # SENSOR OPEN - CLOSE
 ################################## INIT CAMERA   ###########################
-myCamera = Camera()
+myCamera = Camera()       # AV-RECORDING
 ################################## INIT SOCKET CLIENT MEDIAPLAYER   ########
 myMediaPlayer = MediaPlayer()
 ################################## INIT  BLUE_PRINT ########################
@@ -143,9 +145,13 @@ def get_code_for_video():
     print("Current Code:")
     print(random_code)
     
-    # Save it to database 
+    # Create a new user with the session_id
     user = User(sessionId=random_code)
+
+    # Add the new user to the session
     db.session.add(user)
+
+    # Commit the changes to the database
     db.session.commit()
 
 
@@ -160,9 +166,10 @@ def get_code_for_video():
 
         # Set the session ID as a cookie
         onClick_Goto_route = "touch.get_ready_for_show"  # Prepend blueprint name to the route
-        resp = make_response(render_template('4_get_Code_for_Video.html',code=user.sessionId, onClick_Goto_route=onClick_Goto_route))
-        resp.set_cookie('id',random_code)
-        return resp
+
+
+        return  render_template('4_get_Code_for_Video.html',code=user.sessionId, onClick_Goto_route=onClick_Goto_route)
+        
     else:
         # handle the case where no user object was found
         print("Aktuelle User Id ist nicht vergeben")
@@ -177,8 +184,6 @@ def get_code_for_video():
 def get_ready_for_show():
     
  
-
-
     print("5_get_ready_for_show")
 
     onLoad_Goto_route = "touch.wait_for_Door"  # Prepend blueprint name to the route
@@ -218,13 +223,9 @@ def wait_for_Door():
 #####################################################################
 @touch_blueprint.route('/record_show')
 def record_show():
-    # while(True):
-    #     pass
+   
     
-    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
-    #TODO Send vis socket selectedShow= red or blue   so that reciver can play the corresponding Video
-    # global selectedShow = selected_Show
-    #TOSO myMediaPlayer.selectSho(sletectedShow );
+   
     myMediaPlayer.load(selectedShow)
     myMediaPlayer.play()  # Send  via Socket to Raspi2 that he should start
     
@@ -248,12 +249,18 @@ def record_show():
 
     # Save the video file name  and path to the database
     # Save videoReayToDownloadFlag to the Database
-    session_id = request.cookies.get('id')
+
+ 
+    session_id = random_code
+
     user = User.query.filter_by(sessionId=session_id).first()
+
     print(myCamera.videoFileName)
     print(myCamera.videoFilePath)
+
     user.videoFile = myCamera.videoFileName
     user.videoFilePath = myCamera.videoFilePath
+    
     user.videoReayToDownloadFlag = True
     db.session.commit()
 
@@ -262,19 +269,5 @@ def record_show():
 
     return render_template('1_wanna_change.html', onClick_Goto_route=onClick_Goto_route)
      
-     # THIS COE BLOCK IS FOR TESTTING
-     # LATER I WILL BE REMOVE
-    # last_entry = User.query.order_by(User.createdAt.desc()).first()
-
-    # if last_entry is not None:
-
-    #     print(last_entry.videoFile)
-    #     video_url = last_entry.videoFile
-    #     print(video_url)
-    #     return render_template('7_ende_show.html',video_url=video_url)
-    # else:
-
-    #     return"Die VideoUrl konnte nicht ausgelesen werden"
-
 
 

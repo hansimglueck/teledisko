@@ -34,7 +34,7 @@ def index():
                
                 return redirect(url_for('prepare_download', session_id=user.sessionId))
         else:
-
+              # Code wurde  falsch eingeben
             return render_template('fon_code_not_found.html')
         
     return render_template('fon_index.html')
@@ -82,15 +82,26 @@ def prepare_download(session_id):
 
 @app.route('/download/<session_id>')
 def download(session_id):
+
+    # Checke die Datenbank ob der eingebene Code von User
+    # in dder Datenbank auftaucht
     user = User.query.filter_by(sessionId=session_id).first()
 
+    #Wennja und das video noch nicht runbtergealden worden ist,dann
     if user and not user.downloaded:
-        video_file = user.v
-        video_directory = '/media/alphi/BB42-5BFC/'
-        app.config['UPLOAD_FOLDER'] = video_directory
-        print( app.config['UPLOAD_FOLDER'] + video_file)
+
+        video_file = user.videoFileName
+        
+        app.config['DOWNLOAD_FOLDER'] = '/media/alphi/BB42-5BFC/'
+
+        print( app.config['DOWNLOAD_FOLDER] + video_file)
+
         try:
-            return send_from_directory(app.config['UPLOAD_FOLDER'], video_file, as_attachment=True)
+            return send_from_directory(app.config['DOWNLOAD_FOLDER], video_file, as_attachment=True)
+        
+            user.downloaded = True
+            db.session.commit()
+        
         except Exception as e:
             print(str(e))
             abort(500, description="Error during file download")

@@ -72,7 +72,6 @@ def strong_or_soft():
 
     onClick_Goto_route = "touch.DSGVO"  # Prepend blueprint name to the route
 
-    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
     return render_template('3_strong_or_soft.html', onClick_Goto_route=onClick_Goto_route)
 
 
@@ -123,10 +122,6 @@ def get_code_for_video():
     
     print("4_get_code_for_video")
     
-    # Create a Random Code for Doenlaod Video
-    # id = str(randint(0, 1000000))
-    # print("Aktuelle Code:")
-    # print(id)
 
     # Generate a random number with 2 digits
     random_number = random.randint(10, 99)
@@ -152,13 +147,17 @@ def get_code_for_video():
     user = User(sessionId=random_code)
     db.session.add(user)
     db.session.commit()
-         
+
+
+    # Abfrage  of password wirklich  in die datenbak gespeichert worde
     user = User.query.filter_by(sessionId=random_code).first()
 
+    # wenn ja
     if user is not None:
-        # do something with the user object
+        
         print("Random Code:")
         print(user.sessionId)
+
         # Set the session ID as a cookie
         onClick_Goto_route = "touch.get_ready_for_show"  # Prepend blueprint name to the route
         resp = make_response(render_template('4_get_Code_for_Video.html',code=user.sessionId, onClick_Goto_route=onClick_Goto_route))

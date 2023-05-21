@@ -204,7 +204,10 @@ def wait_for_Door():
      print("Oeffne die Tuer ")
      print("Und schliesse Sie")
      print ("Damit die Show beginnt")
+     
 
+
+     ######## BLOCING   ######
      #########################
      myDoor.wait_for_closing() 
      #########################
@@ -253,7 +256,7 @@ def record_show():
     user = User.query.filter_by(sessionId=session_id).first()
     print(myCamera.videoFileName)
     print(myCamera.videoFilePath)
-    user.videoFile = myCamera.videoFileName
+    user.videoFileName = myCamera.videoFileName
     user.videoFilePath = myCamera.videoFilePath
     user.videoReayToDownloadFlag = True
     db.session.commit()

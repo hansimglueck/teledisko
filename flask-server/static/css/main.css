@@ -48,7 +48,7 @@ html,body {
 }
 
 .wanna_change {
-	background-image: url('../images/wanna_change.png');
+	background-image: url('../images/1_wanna_change.png');
 }
 
 .wanna_change_button {
@@ -59,7 +59,7 @@ html,body {
 }
 
 .info_wanna_change {
-	background-image: url('../images/info_wanna_change.png');
+	background-image: url('../images/2_info_wanna_change.png');
 }
 
 .info_wanna_change_button {
@@ -71,7 +71,7 @@ html,body {
 
 .strong_or_soft
 {
-	background-image: url('../images/strong_or_soft.png');
+	background-image: url('../images/3_strong_or_soft.png');
 }
 
 .strong_or_soft_red_button {
@@ -90,7 +90,7 @@ html,body {
 
 .DSGVO
 {
-	background-image: url('../images/DSGVO.png');
+	background-image: url('../images/3b_DSGVO.png');
 }
 
 .DSGVO_button {
@@ -103,7 +103,7 @@ html,body {
 
 
 .get_qr_and_wifi {
-	background-image: url('../images/get_qr_and_wifi.png');
+	background-image: url('../images/3c_get_qr_and_wifi.png');
 }
 
 .get_qr_and_wifi_button {
@@ -131,7 +131,7 @@ z-index: 100;
 
 .get_code_for_video
 {
-	background-image: url('../images/get_code_for_video.png');
+	background-image: url('../images/4_get_code_for_video.png');
 }
 
 .get_code_for_video_button {
@@ -153,7 +153,7 @@ z-index: 100;
 
 .wait_for_door
 {
-	background-image: url('../images/wait_for_door.png');
+	background-image: url('../images/6_wait_for_door.png');
 }
 
 .wait_for_door_field {
@@ -172,7 +172,7 @@ z-index: 100;
 
 .get_ready_for_show
 {
-	background-image: url('../images/get_ready_for_show.png');
+	background-image: url('../images/5_get_ready_for_show.png');
 }
 
 .get_ready_for_show_button {

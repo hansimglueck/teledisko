@@ -51,6 +51,8 @@ class PlayerHandler(socketserver.BaseRequestHandler):
             video_viewer_process = play_video(video_file)
 
             audio_playback_complete.wait()
+            if video_viewer_process is not None:
+                stop_video_viewer(video_viewer_process)
             print("Playback completed")
             self.request.sendall(b'complete')
 

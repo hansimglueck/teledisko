@@ -42,13 +42,15 @@ class PlayerHandler(socketserver.BaseRequestHandler):
                 sound = blue_sound
                 video_file = blue_video
 
+            # Start the video playback in the main thread
+            video_viewer_process = play_video(video_file)
+            time.sleep(0.5)
+
             audio_playback_complete.clear()
             audio_playback = play_audio(sound)
             watch_playback_thread = threading.Thread(target=watch_playback, args=(audio_playback,))
             watch_playback_thread.start()
 
-            # Start the video playback in the main thread
-            video_viewer_process = play_video(video_file)
 
             audio_playback_complete.wait()
             if video_viewer_process is not None:
@@ -76,7 +78,8 @@ def watch_playback(play_obj):
 
 def play_video(video_file):
     # Start the video viewer process using subprocess.Popen
-    command = f"sudo video-viewer {video_file} --led-slowdown-gpio=2 --led-rows=32 --led-cols=64 --led-chain=4 --led-parallel=2 --led-pixel-mapper=V-mapper:Z -f"
+    # command = f"sudo video-viewer {video_file} --led-slowdown-gpio=2 --led-rows=32 --led-cols=64 --led-chain=4 --led-parallel=2 --led-pixel-mapper='Rotate:180;V-mapper:Z'"
+    command = f"sudo led-image-viewer  --led-slowdown-gpio=2 --led-rows=32 --led-cols=64 --led-chain=4 --led-parallel=2 --led-pixel-mapper='Rotate:180;V-mapper:Z' {video_file}"
     return subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
 
 def stop_video_viewer(process):

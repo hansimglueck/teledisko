@@ -112,7 +112,7 @@ h1, p {
 	font-family: 'UniviaProBook';
 	font-size: 13px;
 	color: white;
-	margin: 15px;
+	margin: 30px;
 }
 
 
@@ -226,6 +226,34 @@ font-family: 'UniviaProBook';
 
   .btn_try_again {
 	/* margin-top:20px; */
+  }
+
+
+
+  /* ################################################################### */
+/* ###################### CSSWARTUNG            M################## */
+/* ################################################################### */
+
+.text_wartung{
+	color: white;
+	font-size: 15px;
+	font-family: 'UniviaProBook';
+	text-align: center;
+	
+}
+
+.btn_wartung {
+border: 2px solid rgb(235, 4, 4);
+border-radius: 10px;
+background-color: rgb(0, 0, 0);
+color: white;
+padding: 4px 20px 3px 20px;
+cursor: pointer;
+font-size: 27px;
+font-family: 'UniviaProBook';
+text-align: center;
+margin: 20px;
+
   }
 
 

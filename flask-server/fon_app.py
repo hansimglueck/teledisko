@@ -3,7 +3,7 @@ from config import Config
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
-
+import subprocess
 
 app = Flask(__name__, static_url_path='/static')
 app.config['STATIC_FOLDER'] = 'static'
@@ -100,6 +100,48 @@ def download(session_id):
 def thanks():
     return render_template('fon_download_success.html')
 
+
+
+
+############################################################################
+###################     WARTUNG  ##########################
+############################################################################
+
+
+@app.route('/shutdown')
+def shutdown():
+    return render_template('wartung_elixyr_disco.html')
+
+
+@app.route('/alles_ausschalten')
+def alles_ausschalten():
+     # animation
+    result = subprocess.run(["ssh", "pi@telepi42", "sudo shutdown -h now"], shell=False)
+    print(result)
+    # netzwerk
+    result = subprocess.run(["ssh", "pi@uiraspi2", "sudo shutdown -h now"], shell=False)
+    print(result)
+    # touch and camera
+    result = subprocess.run(["ssh", "pi@telepi2", "sudo shutdown -h now"], shell=False) 
+    print(result)
+
+    return render_template('wartung_elixyr_disco.html')
+
+
+
+@app.route('/reset_alles')
+def reset_alles():
+     # animation
+    result = subprocess.run(["ssh", "pi@telepi42", "sudo shutdown -r now"], shell=False)
+    print(result)
+    # netzwerk
+    result = subprocess.run(["ssh", "pi@uiraspi2", "sudo shutdown -r now"], shell=False)
+    print(result)
+    # touch and camera
+    result = subprocess.run(["ssh", "pi@telepi2", "sudo shutdown -r now"], shell=False) 
+    print(result)
+
+    return render_template('Nachdem SuperReset - muss du dich wieder in das Elixyr Netzwerk anmelden')
 
 
 

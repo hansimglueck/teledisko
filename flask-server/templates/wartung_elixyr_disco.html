@@ -1,0 +1,27 @@
+
+{% extends "base_fon.html" %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+  <div class="content">
+    <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
+
+
+    <p class="text_wartung"> - Hilft bei alle Problemen - </p>
+    <a href="{{ url_for('reset_alles') }}"> <button class="btn_wartung">*SUPER-RESET*</button></a>
+    <p class="text_wartung"> 1.Läuft die Animation oder der Sound in der Kabine ständig oder verhält sie sich ungewöhnlich?</p>
+    <p class="text_wartung"> 2.Das Touchscreen reagiert nicht.</p>
+    <p class="text_wartung"> 3.Können alle Besucher sich nicht mit dem Netzwerk ElixyrDisco verbinden oder es nicht finden?</p>
+    <p class="text_wartung"> 4.Sind alle Besucher nicht in der Lage, ihre Videos herunterzuladen?</p>
+
+    <a href="{{ url_for('alles_ausschalten') }}"> <button class="btn_wartung">*FEIERABEND*</button></a>
+    <p class="text_wartung"> Stellen Sie sicher, dass Sie die Installation korrekt ausschalten, bevor Sie den Netzstecker ziehen..</p>
+
+  </div>
+</div>
+{% endblock %}

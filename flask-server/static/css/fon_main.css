@@ -60,7 +60,7 @@
 /* ################################################################### */
 .container {
 	display: flex;
-	width: 364px;
+	width:auto;
 	height: 100vh;
 	flex-direction: column;
 	justify-content: center;

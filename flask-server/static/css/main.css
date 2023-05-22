@@ -1,5 +1,5 @@
 
-body {
+html,body {
 	margin: 0;
 	padding: 0;
 	background-color: hsl(0, 0%, 0%);
@@ -7,6 +7,7 @@ body {
 	font-weight: bold;
 	width: 800px;
 	height: 1280px;
+	overscroll-behavior-x: none;
 }
 
 .elixir_logo{
@@ -156,11 +157,11 @@ z-index: 100;
 }
 
 .wait_for_door_field {
-	top: 60%;
-	left: 30%;
+	/* top: 60%;
+	left: 30%; */
 	width: 40%;
-	height: 28%;
-	background-color: black;
+	height: 40%;
+	/* background-color: black; */
 	font-size: 400%;
 	font-weight: lighter;
 	text-align: center;
@@ -194,7 +195,7 @@ z-index: 100;
 	text-align: center;
 	top: 82%;
 	left: 54%;
-	width: 27%;
+	width: 30%;
 	height: 8%;
 	padding: 10px;
 	  padding-left: 10px;
@@ -257,6 +258,8 @@ a:active { text-decoration: none; }
 
 .timer{
 	position: relative;
+	top: 137%;
+	left: 74%;
   }
 
   .time {
@@ -267,7 +270,7 @@ a:active { text-decoration: none; }
   }
 
   .time{
-	font-size: 30px;
+	font-size: 70px;
 	color: #fff;
  
 	font-weight: bold;
@@ -278,7 +281,7 @@ a:active { text-decoration: none; }
 	vertical-align: middle;
   }
   circle{
-	stroke-width: 10px;
+	stroke-width: 20px;
 	fill: transparent;
 	stroke-linecap: butt;
   }

@@ -79,7 +79,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+	/* gap: 20px; */
 }
 
 .logo {
@@ -90,7 +90,16 @@
 	width: 73px;
 }
 
+.title-fon-index,
+.title-fon-index-2,
+.title-fon-index-3 {
+    word-wrap: break-word; /* Wraps text */
+    font-size: 3vw; /* Makes font size responsive. Adjust the value as needed */
+}
 
+h1, p {
+	margin:0;
+}
 
 
 
@@ -103,7 +112,7 @@
 	font-family: 'UniviaProBook';
 	font-size: 13px;
 	color: white;
-	line-height: 0px;
+	margin: 15px;
 }
 
 
@@ -111,7 +120,7 @@
 	font-family: 'UniviaProUltra-Italic';
 	font-size:12px;
 	color: white;
-	line-height: 16px;
+	
 }
 
 .title-fon-index-3{
@@ -119,7 +128,7 @@
 	color: white;
 	font-size: 17px;
 	font-family: 'UniviaProBook';
-	line-height: 5px;
+	
 }
 
 
@@ -134,7 +143,7 @@
 	font-family: 'UniviaProBook';
 font-size: 12px;
 color: white;
-line-height: 0px;
+
 }
 
 
@@ -143,7 +152,7 @@ line-height: 0px;
 	font-family: 'UniviaProUltra-Italic';
 font-size: 12px;
 color: white;
-line-height: 16px;
+/* line-height: 16px; */
 
 }
 
@@ -152,9 +161,16 @@ line-height: 16px;
 	color: white;
 font-size: 17px;
 font-family: 'UniviaProBook';
-line-height: 5px;
+/* line-height: 5px; */
 
 }
+.title-fon-index-sucess,
+.title-fon-index-2-sucess,
+.title-fon-index-3-sucess {
+	margin:20px;
+
+}
+
 
 
 
@@ -169,7 +185,7 @@ line-height: 5px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  /* gap: 20px; */
   font-family: 'UniviaProBook';
   color: white;
   font-size: 16px;
@@ -204,11 +220,12 @@ line-height: 5px;
 	font-size: 15px;
 	font-family: 'UniviaProBook';
 	text-align: center;
+	margin-top: 20px;
 	
   } 
 
   .btn_try_again {
-	margin-top:20px;
+	/* margin-top:20px; */
   }
 
 

@@ -6,7 +6,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 
 # Assuming you have a directory where the video files are stored
-video_directory = '/path/to/video/files/'
+video_directory = '/media/alphi/BB42-5BFC/'
 
 
 def delete_old_video_files():

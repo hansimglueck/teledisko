@@ -1,3 +1,4 @@
+
 body {
 	margin: 0;
 	padding: 0;
@@ -8,7 +9,7 @@ body {
 	height: 1280px;
 }
 
-.elixir_logo {
+.elixir_logo{
 	position: fixed;
 	top: 36px;
 	left: 43px;
@@ -17,7 +18,7 @@ body {
 	padding: 24px;
 	background-color: #000;
 
-
+	
 }
 
 .background {
@@ -67,7 +68,8 @@ body {
 	height: 10%;
 }
 
-.strong_or_soft {
+.strong_or_soft
+{
 	background-image: url('../images/strong_or_soft.png');
 }
 
@@ -85,7 +87,8 @@ body {
 	height: 10%;
 }
 
-.DSGVO {
+.DSGVO
+{
 	background-image: url('../images/DSGVO.png');
 }
 
@@ -108,14 +111,13 @@ body {
 	width: 40%;
 	height: 10%;
 }
-
-.qr_code {
+.qr_code{
 	position: fixed;
-	top: 35%;
-	left: 40%;
-	width: auto;
-	height: 10%;
-	z-index: 100;
+top: 35%;
+left: 40%;
+width: auto;
+height: 10%;
+z-index: 100;
 }
 
 
@@ -126,7 +128,8 @@ body {
 
 
 
-.get_code_for_video {
+.get_code_for_video
+{
 	background-image: url('../images/get_code_for_video.png');
 }
 
@@ -147,7 +150,8 @@ body {
 	font-weight: lighter;
 }
 
-.wait_for_door {
+.wait_for_door
+{
 	background-image: url('../images/wait_for_door.png');
 }
 
@@ -165,7 +169,8 @@ body {
 	justify-content: center;
 }
 
-.get_ready_for_show {
+.get_ready_for_show
+{
 	background-image: url('../images/get_ready_for_show.png');
 }
 
@@ -177,7 +182,7 @@ body {
 }
 
 
-.get_ready_for_canceled_button {
+.get_ready_for_canceled_button{
 
 	border: 5px solid black;
 	background-color: rgb(0, 0, 0);
@@ -192,30 +197,22 @@ body {
 	width: 27%;
 	height: 8%;
 	padding: 10px;
-	padding-left: 10px;
+	  padding-left: 10px;
 	padding-left: 10px;
 	padding-left: 41px;
 	font-size: revert;
 	font-weight: 700;
-}
+	}
 
 
 
-a:link {
-	text-decoration: none;
-}
+a:link { text-decoration: none; }
 
-a:visited {
-	text-decoration: none;
-}
+a:visited { text-decoration: none; }
 
-a:hover {
-	text-decoration: none;
-}
+a:hover { text-decoration: none; }
 
-a:active {
-	text-decoration: none;
-}
+a:active { text-decoration: none; }
 
 
 
@@ -225,75 +222,72 @@ a:active {
 /* ##########################CSS FONTS######################	*/
 
 
-@font-face {
-	font-family: 'UniviaProBook-Italic';
-	src: url('UniviaProBook-Italic.otf') format('opentype');
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
+	@font-face {
+		font-family: 'UniviaProBook-Italic';
+		src: url('UniviaProBook-Italic.otf') format('opentype');
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+	  }
+	  @font-face {
+		font-family: 'UniviaProRegular';
+		src: url('UniviaProRegular.otf') format('opentype');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	  }
+	  @font-face {
+		font-family: 'UniviaProBook';
+		src: url('UniviaProBook.otf') format('opentype');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	  }
 
-@font-face {
-	font-family: 'UniviaProRegular';
-	src: url('UniviaProRegular.otf') format('opentype');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'UniviaProBook';
-	src: url('UniviaProBook.otf') format('opentype');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'UniviaProUltra-Italic';
-	src: url('UniviaProUltra-Italic.otf') format('opentype');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
+	  @font-face {
+		font-family: 'UniviaProUltra-Italic';
+		src: url('UniviaProUltra-Italic.otf') format('opentype');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	  }
 
 
 /* ##########################CSS TIMER COUNTDOWN######################	*/
 
-.timer {
+.timer{
 	position: relative;
-}
+  }
 
-.time {
+  .time {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%)
-}
+  }
 
-.time {
+  .time{
 	font-size: 30px;
 	color: #fff;
-
+ 
 	font-weight: bold;
-}
+  }
 
-svg {
+  svg{
 	display: inline-block;
 	vertical-align: middle;
-}
-
-circle {
+  }
+  circle{
 	stroke-width: 10px;
 	fill: transparent;
 	stroke-linecap: butt;
-}
+  }
 
-#circle1 {
+  #circle1{
 	stroke: #ffffff;
-}
+  }
 
-#circle2 {
-	stroke: rgba(0, 0, 0, .01);
+  #circle2{
+	stroke:rgba(0,0,0, .01);
 	transition: 1s linear;
-}
+  }

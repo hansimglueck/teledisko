@@ -8,7 +8,7 @@ app = Flask(__name__, static_url_path='/static')
 app.config['STATIC_FOLDER'] = 'static'
 app.config.from_object(Config)
 
-host = '0.0.0.0'  # Lauschen auf Anfragen von beliebigen IPs
+
 
 app.register_blueprint(touch_blueprint)
 

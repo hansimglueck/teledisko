@@ -72,7 +72,6 @@ def strong_or_soft():
 
     onClick_Goto_route = "touch.DSGVO"  # Prepend blueprint name to the route
 
-    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
     return render_template('3_strong_or_soft.html', onClick_Goto_route=onClick_Goto_route)
 
 
@@ -222,16 +221,12 @@ def wait_for_Door():
 #####################################################################
 @touch_blueprint.route('/record_show')
 def record_show():
-    # while(True):
-    #     pass
-    
-    #TODO We need a global variable  SELECTED_SHOW from  3_strong_or_soft.html
-    #TODO Send vis socket selectedShow= red or blue   so that reciver can play the corresponding Video
-    # global selectedShow = selected_Show
-    #TOSO myMediaPlayer.selectSho(sletectedShow );
+ 
+
     myMediaPlayer.load(selectedShow)
-    myMediaPlayer.play()  # Send  via Socket to Raspi2 that he should start
-    
+    myMediaPlayer.play()  
+
+
     #RECO
     ######################################
     print("starting Camera for recording")
@@ -239,10 +234,10 @@ def record_show():
     myCamera.startVideoRecording()
     ######################################
 
-    
+    # sleep(10)
     myMediaPlayer.wait_for_complete() # Blockking
 
-
+    
 
     ######################################
     print("stopping recording")
@@ -266,19 +261,6 @@ def record_show():
 
     return render_template('1_wanna_change.html', onClick_Goto_route=onClick_Goto_route)
      
-     # THIS COE BLOCK IS FOR TESTTING
-     # LATER I WILL BE REMOVE
-    # last_entry = User.query.order_by(User.createdAt.desc()).first()
-
-    # if last_entry is not None:
-
-    #     print(last_entry.videoFile)
-    #     video_url = last_entry.videoFile
-    #     print(video_url)
-    #     return render_template('7_ende_show.html',video_url=video_url)
-    # else:
-
-    #     return"Die VideoUrl konnte nicht ausgelesen werden"
 
 
 

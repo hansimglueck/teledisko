@@ -7,6 +7,9 @@ from models import db, User
 
 app = Flask(__name__, static_url_path='/static')
 app.config['STATIC_FOLDER'] = 'static'
+app.config['UPLOAD_FOLDER'] = '/media/alphi/BB42-5BFC/'
+# app.config['UPLOAD_FOLDER'] = 'static/videos/'
+
 app.config.from_object(Config)
 db.init_app(app)
 
@@ -67,22 +70,23 @@ def download(session_id):
 
         video_file = user.videoFileName
 
-        video_directory = '/media/alphi/BB42-5BFC/'
-        app.config['UPLOAD_FOLDER'] = video_directory
-        print( app.config['UPLOAD_FOLDER'] + video_file)
+    
+     
 
         try:
-
             user.downloaded = True
             db.session.commit()
             return send_from_directory(app.config['UPLOAD_FOLDER'], video_file, as_attachment=True)
-        
-
+    
         except Exception as e:
-            
+            user.downloaded = False
+            db.session.commit()
             print(str(e))
-            abort(500, description="Error during file download")
+            #abort(500, description="Error during file download")
+            return render_template('fon_error_video_downloaded.html')
+
     else:
+       
         return render_template('fon_video_downloaded.html')
 
     

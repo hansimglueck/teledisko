@@ -4,11 +4,11 @@
 {% block head %}
 
 <script>
-        // load page /qrLoaded on page load
-        window.onload = function () {
-        window.location.href = "{{ url_for(onLoad_Goto_route) }}";
-        
-    }
+  // load page /qrLoaded on page load
+  window.onload = function () {
+    window.location.href = "{{ url_for(onLoad_Goto_route) }}";
+
+  }
 
 
 </script>
@@ -19,54 +19,57 @@
 
 <div class="background wait_for_door"></div>
 
-<img class="elixir_logo" src="../static/images/Elixyr_Logo_weiss.png" >
+<img class="elixir_logo" src="../static/images/Elixyr_Logo_weiss.png">
 
 
 <div id="countdown" class="button wait_for_door_field">
-    <div class="timer">
-        <div class="time">
-            <span id="minute">1</span>:<span id="second">30</span>
-        </div>
-        <svg width="350" height="350">
-            <circle id="circle1" cx="175" cy="175" r="150"></circle>
-            <circle id="circle2" cx="175" cy="175" r="150"></circle>
-        </svg>
+  <div class="timer">
+    <div class="time">
+      <span id="minute">1</span>:<span id="second">30</span>
     </div>
+    <svg width="350" height="350">
+      <circle id="circle1" cx="175" cy="175" r="150"></circle>
+      <circle id="circle2" cx="175" cy="175" r="150"></circle>
+    </svg>
+  </div>
 </div>
 
 <script>
-    const circle = document.getElementById('circle1');
-    const length = circle.getTotalLength();
-    const minute = document.getElementById('minute');
-    const second = document.getElementById('second');
+  const circle = document.getElementById('circle1');
+  const length = circle.getTotalLength();
+  const minute = document.getElementById('minute');
+  const second = document.getElementById('second');
 
-    circle.style.strokeDasharray = length;
-    circle.style.strokeDashoffset = 0;
+  circle.style.strokeDasharray = length;
+  circle.style.strokeDashoffset = 0;
 
-    let totalTime = 90; 
-    let count = totalTime; 
-    let timer;
+  let totalTime = 90;
+  let count = totalTime;
+  let timer;
 
-    function startTimer(){
-      timer = setInterval(function() {
+  function startTimer() {
+    setTimeout(function () {
+      timer = setInterval(function () {
         count--;
-        if(count < 0) {
+        if (count < 0) {
           stopTimer();
           return;
         }
         minute.textContent = Math.floor(count / 60);
-        second.textContent = (count % 60 < 10 ? '0' : '') + count % 60; // Added back the ternary operator for seconds
+        second.textContent = (count % 60 < 10 ? '0' : '') + count % 60;
         circle.style.strokeDashoffset = ((totalTime - count) / totalTime) * length;
-      }, 1000)
-    }
+      }, 1000);
+    }, 1000);
+  }
 
-    function stopTimer(){
-      clearInterval(timer);
-    }
 
-    // Start the timer when the page loads
-    startTimer();
-  </script>
+  function stopTimer() {
+    clearInterval(timer);
+  }
+
+  // Start the timer when the page loads
+  startTimer();
+</script>
 
 
 {% endblock %}

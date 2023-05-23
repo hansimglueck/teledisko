@@ -11,8 +11,15 @@
     }
 </script>
 
-get_ready_for_show
-
+<script>
+    // JavaScript to change overscroll-behavior-x on page load
+    window.addEventListener('load', function() {
+      var htmlElement = document.querySelector('html');
+      var bodyElement = document.querySelector('body');
+      htmlElement.style.overscrollBehaviorX = 'auto';
+      bodyElement.style.overscrollBehaviorX = 'auto';
+    });
+  </script>
 {% endblock %}
 {% block body %}
 

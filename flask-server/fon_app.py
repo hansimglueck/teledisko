@@ -74,13 +74,13 @@ def download(session_id):
      
 
         try:
-            user.downloaded = True
-            db.session.commit()
+            # user.downloaded = True
+            # db.session.commit()
             return send_from_directory(app.config['UPLOAD_FOLDER'], video_file, as_attachment=True)
     
         except Exception as e:
-            user.downloaded = False
-            db.session.commit()
+            # user.downloaded = False
+            # db.session.commit()
             print(str(e))
             #abort(500, description="Error during file download")
             return render_template('fon_error_video_downloaded.html')

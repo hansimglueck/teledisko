@@ -16,19 +16,22 @@ class Camera:
         self.picam2 = Picamera2()
         
 
-        #controls = {"ExposureTime": 3000, "AnalogueGain": 1.0}
-        #video_config = self.picam2.create_video_configuration(main={"size": (640, 480)},controls=controls)
+        controls = {"Contrast":2.0,
+                    "Brightness":0.4,
+                    "ExposureTime": 30000,
+                    "AnalogueGain": 20.0
+                    }
+        video_config = self.picam2.create_video_configuration(main={"size": (1080, 1080)},controls=controls)
         
-        video_config = self.picam2.create_video_configuration(main={"size": (500, 500)})
+        
+      
         self.picam2.configure(video_config)
-        self.encoder = H264Encoder(10000000)
-        # self.videoFileName = 'static/videos/test-' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
-        #self.videoFileName = '/media/alphi/BB42-5BFC/ElixirDisco' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
+        self.encoder = H264Encoder(10000000)#10MB
+     
+
 
         self.videoFilePath = '/media/alphi/BB42-5BFC/'
-        # self.videoFilePath = 'static/videos/'
         self.videoFileName = 'ElixirDisco' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
-
         self.output = FfmpegOutput( self.videoFilePath + self.videoFileName, audio=True )
 
 

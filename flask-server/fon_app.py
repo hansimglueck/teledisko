@@ -4,6 +4,13 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 import subprocess
+from media_player_client.media_player import MediaPlayer
+import os
+from datetime import datetime, timedelta
+
+
+myMediaPlayer2 = MediaPlayer()
+
 
 app = Flask(__name__, static_url_path='/static')
 app.config['STATIC_FOLDER'] = 'static'
@@ -20,15 +27,20 @@ db.init_app(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    
     if request.method == 'POST':
+
         session_id = request.form['session_id']
 
         user = User.query.filter_by(sessionId=session_id).first()
 
         if user:
+                
+            if user.videoDeleted :
 
-                # Video wurde mit diesem Password schonmal runtergeladen
-            if user.downloaded or user.videoDeleted: 
+                return render_template('fon_video_deleted.html')
+            
+            elif user.downloaded :
 
                 return render_template('fon_video_downloaded.html')
             
@@ -36,6 +48,7 @@ def index():
             else:
                
                 return redirect(url_for('prepare_download', session_id=user.sessionId))
+            
         else:
 
             return render_template('fon_code_not_found.html')
@@ -70,8 +83,6 @@ def download(session_id):
 
         video_file = user.videoFileName
 
-    
-     
 
         try:
             # user.downloaded = True
@@ -112,6 +123,11 @@ def thanks():
 def shutdown():
     return render_template('wartung_elixyr_disco.html')
 
+@app.route('/stop_record')
+def stop_show():
+    myMediaPlayer2.stop()
+    return render_template('wartung_elixyr_disco.html')
+
 
 @app.route('/alles_ausschalten')
 def alles_ausschalten():
@@ -141,7 +157,48 @@ def reset_alles():
     result = subprocess.run(["ssh", "pi@telepi2", "sudo shutdown -r now"], shell=False) 
     print(result)
 
-    return render_template('Nachdem SuperReset - muss du dich wieder in das Elixyr Netzwerk anmelden')
+    return render_template('wartung_elixyr_disco.html')
+
+
+
+
+
+@app.route('/soft_reset')
+def soft_reset():
+     # animation
+    result = subprocess.run(["ssh", "pi@telepi42", "sudo systemctl --user restart media-socket-server.service"], shell=False)
+    print(result)
+
+    # TouchSceen - Recoord Video
+    result = subprocess.run(["ssh", "pi@telepi2", "sudo systemctl --user restart teleflask-server.service"], shell=False) 
+    print(result)
+    #Chromium Browser
+    result = subprocess.run(["ssh", "pi@telepi2", "sudo systemctl --user restart kiosk.service"], shell=False) 
+    print(result)
+
+    return render_template('wartung_elixyr_disco.html')
+
+
+
+@app.route('/delete_videos')
+def delete_videos():
+     # animation
+    video_directory = '/media/alphi/BB42-5BFC/'
+    current_time = datetime.now()
+    one_hour_ago = current_time - timedelta(hours=1)
+
+    # Delete video files
+    old_video_files = User.query.filter(User.createdAt <= one_hour_ago).all()
+    for video_file in old_video_files:
+        if video_file.videoFileName is not None:
+            file_path = os.path.join(video_directory, video_file.videoFileName)
+            print(file_path)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+                video_file.videoDeleted= True
+                db.session.commit()
+
+    return render_template('wartung_elixyr_disco.html')
 
 
 

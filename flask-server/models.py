@@ -9,7 +9,7 @@ class User(db.Model):
     videoFilePath = db.Column(db.String(120), unique=False)
     videoFileName = db.Column(db.String(120), unique=False)
     sessionId = db.Column(db.String(120), unique=False, nullable=False)
-    createdAt = db.Column(db.DateTime, default=datetime.utcnow)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
     qrLoadedFlag = db.Column(db.Boolean, default=False)
     videoReayToDownloadFlag = db.Column(db.Boolean, default=False)
     downloaded = db.Column(db.Boolean, default=False)  # Add this line

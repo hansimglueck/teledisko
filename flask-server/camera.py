@@ -31,7 +31,7 @@ class Camera:
 
 
         self.videoFilePath = '/media/alphi/BB42-5BFC/'
-        self.videoFileName = 'ElixirDisco' +time.strftime("%Y%m%d-%H%M%S")+'.mp4'
+        self.videoFileName = 'ElixirDisco-' + time.strftime("%Y%m%d-%H%M")+'.mp4'
         self.output = FfmpegOutput( self.videoFilePath + self.videoFileName, audio=True )
 
 

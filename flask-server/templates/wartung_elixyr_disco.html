@@ -12,8 +12,16 @@
     <img src="{{ url_for('static', filename='images/Elixyr_Logo_weiss.png') }}" alt="Logo" class="logo">
 
 
-    <p class="text_wartung"> - Hilft bei alle Problemen - </p>
+    <a href="{{ url_for('stop_show') }}"> <button class="btn_wartung">*STOP-SHOW*</button></a>
+    <p class="text_wartung"> Beuscher verlassen die Show zu frueh</p>
+
+    <!-- <a href="#{{ url_for('soft_reset') }}#"> <button class="btn_wartung">*SOFT-RESET*</button></a>
+    <p class="text_wartung"> Nur Touchscreen und Animation-Sound werden  neu gestarten ohne System-Reboot</p> -->
+
+
     <a href="{{ url_for('reset_alles') }}"> <button class="btn_wartung">*SUPER-RESET*</button></a>
+    <p class="text_wartung"> - Hilft bei alle Problemen - </p><br>
+
     <p class="text_wartung"> 1.Läuft die Animation oder der Sound in der Kabine ständig oder verhält sie sich ungewöhnlich?</p>
     <p class="text_wartung"> 2.Das Touchscreen reagiert nicht.</p>
     <p class="text_wartung"> 3.Können alle Besucher sich nicht mit dem Netzwerk ElixyrDisco verbinden oder es nicht finden?</p>
@@ -21,6 +29,10 @@
 
     <a href="{{ url_for('alles_ausschalten') }}"> <button class="btn_wartung">*FEIERABEND*</button></a>
     <p class="text_wartung"> Stellen Sie sicher, dass Sie die Installation korrekt ausschalten, bevor Sie den Netzstecker ziehen..</p>
+
+    <a href="{{ url_for('delete_videos') }}"> <button class="btn_wartung">*DELETE-VIDEOS*</button></a>
+    <p class="text_wartung"> Hier kannst du alle Videos löschen, die älter als eine Stunde sind.</p>
+
 
   </div>
 </div>
